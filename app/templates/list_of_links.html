@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Links{% endblock %}
+
+{% block content %}
+
+
+  {% if links.email %}
+  <br>
+  <div class="card text-center">
+    <div class="card-header">
+      E-mail
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">If you are not on social networks</h5>
+      <p class="card-text">You can email me</p>
+      <a href="mailto:{{links.email[0].adress}}" class="btn btn-primary">Write a letter</a>
+    </div>
+  </div>
+  <br>
+  {% endif %}
+
+
+  {% endblock %}

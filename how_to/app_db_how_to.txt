@@ -1,0 +1,11 @@
+Locally using SQlite
+
+run:
+flask shell
+
+from app.extensions import db
+from app.models.post import Post
+db.create_all()
+
+db.drop_all()
+db.create_all()

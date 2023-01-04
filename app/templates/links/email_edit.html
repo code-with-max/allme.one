@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Edit email{% endblock %}
+
+{% block content %} 
+<div class="container">
+    <form method="POST">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" name="adress" id="adress"
+                class="form-control" 
+                value="{{ email.adress }}"
+                placeholder="name@example.com">
+        <div class="mb-3">
+            <label for="text" class="form-label">Description</label>
+            <input type="text" name="description" id="description" 
+                class="form-control" 
+                value="{{ email.description }}" 
+                placeholder="description">
+        </div>
+        <div align="center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
