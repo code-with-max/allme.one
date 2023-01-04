@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}My page{% endblock %}
+
+{% block content %}
+<!-- User added links (using dictionary)-->
+<div class="container">
+  {% for key, link in ulinks.items() %}
+    {{ key }} : {{ link }} 
+    <!-- ABOUT -->
+    {%  if key == "about" %}
+      {% if link %}
+      <div class="card text-center">
+        <div class="card-header">
+          About me
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ link.name }}</h5>
+          <p class="card-text">{{ link.description }}</p>
+          <a href="{{ url_for('main.about', action='edit') }}" class="btn btn-primary">Edit</a>
+          <a href="{{ url_for('main.about', action='delete') }}" class="btn btn-primary">Delete</a>
+        </div>
+      </div>
+      {% endif %}
+    {% endif %}
+    <!-- E-MAIL -->
+    {%  if key == "email" %}
+      {% if link %}
+      <div class="card text-center">
+        <div class="card-header">
+          E-mail
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ link.adress }}</h5>
+          <p class="card-text">{{ link.description }}</p>
+          <a href="{{ url_for('main.email', action='edit') }}" class="btn btn-primary">Edit</a>
+        </div>
+      </div>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>
+<!-- Avaible for user links (using list)-->
+<div class="container">
+  <div align="center">
+    <h4>Upgrade you card:</h4>
+  </div>
+  <div class="d-grid gap-2 d-md-block">
+  {% for link in alinks %}
+    {% if link == "about" %}
+    <a class="btn btn-primary d-grid gap-2 col-6 mx-auto" href="{{ url_for('main.about', action='edit') }}" role="button">{{link}} Link</a>
+    {% endif %}
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}
