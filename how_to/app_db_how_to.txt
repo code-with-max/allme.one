@@ -4,7 +4,7 @@ run:
 flask shell
 
 from app.extensions import db
-from app.models.post import Post
+from app.models.links import *
 db.create_all()
 
 db.drop_all()

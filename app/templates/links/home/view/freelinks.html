@@ -1,0 +1,24 @@
+<div class="card text-center">
+    <div class="card-header">
+      Add links
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div class="d-grid gap-2 col-2 mx-auto">
+        {% for link in free_links %}
+            {% if networks[link]['is_free'] or user.is_paying() %}
+            {% set redirect_url = 'main.' + link %}
+            <a href="{{ url_for(redirect_url, action='edit') }}" class="btn btn-primary">
+                <i class="ti ti-brand-{{link}}"></i>
+                {{ link }}
+            </a>
+            {% endif %}
+        {% endfor %}
+        </div> 
+    </div>
+    <div class="card-footer text-muted">
+    2 days ago
+    </div>
+</div>
+<br>

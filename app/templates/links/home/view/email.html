@@ -1,0 +1,13 @@
+<div class="card text-center">
+    <div class="card-header">
+      <i class="ti ti-at"></i>
+      E-mail
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ user.links[0].email[0].adress }}</h5>
+      <p class="card-text">{{ user.links[0].email[0].description }}</p>
+      <div class="d-grid col-2 mx-auto">
+        <a href="{{ url_for('main.email', action='edit') }}" class="btn btn-primary">Edit</a>
+      </div>
+    </div>
+  </div>

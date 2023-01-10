@@ -1,0 +1,21 @@
+<div class="card text-center">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div class="d-grid gap-2 col-2 mx-auto">
+        {% for link in free_links %}
+            {% if not networks[link]['is_free'] %}
+                <button type="button" class="btn btn-primary" disabled>
+                    <i class="ti ti-brand-{{link}}"></i>  {{ link }}
+                </button>
+            {% endif %}
+        {% endfor %}
+        </div> 
+    </div>
+    <div class="card-footer text-muted">
+    2 days ago
+    </div>
+</div>

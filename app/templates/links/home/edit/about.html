@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Edit email{% endblock %}
+{% block title %}Edit about{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -9,7 +9,7 @@
             <label for="text" class="form-label">Your name</label>
             <input type="text" name="user_name" id="user_name" 
                 class="form-control" 
-                value="{{ about.name }}" 
+                value="{{ about.username }}" 
                 placeholder="Your name">
         <div class="mb-3">
             <label for="text" class="form-label">Description</label>
@@ -18,9 +18,23 @@
                 value="{{ about.description }}" 
                 placeholder="description">
         </div>
-        <div align="center">
+        <div class="d-grid col-2">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
+    <br>
+    <div class="d-grid col-2">
+        <button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDangerZone" aria-expanded="false" aria-controls="collapseDangerZone">
+          Danger zone
+        </button>
+    </div>
+    <br>
+    <div style="min-height: 120px;">
+        <div class="collapse collapse-horizontal" id="collapseDangerZone">
+          <div>
+            <a href="{{ url_for('main.about', action='delete') }}" class="btn btn-primary">Delete</a>
+          </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

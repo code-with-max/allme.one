@@ -3,40 +3,25 @@
 {% block title %}My page{% endblock %}
 
 {% block content %}
-<!-- User added links (using dictionary)-->
+<!-- User added links -->
+{# ''' #}
+{# using list of strings #}
+{# may be later I must using switch-case method #}
+{# ''' #}
 <div class="container">
-  {% for key, link in ulinks.items() %}
-    {{ key }} : {{ link }} 
+  {% for link in used_links %}
     <!-- ABOUT -->
-    {%  if key == "about" %}
-      {% if link %}
-      <div class="card text-center">
-        <div class="card-header">
-          About me
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ link.name }}</h5>
-          <p class="card-text">{{ link.description }}</p>
-          <a href="{{ url_for('main.about', action='edit') }}" class="btn btn-primary">Edit</a>
-          <a href="{{ url_for('main.about', action='delete') }}" class="btn btn-primary">Delete</a>
-        </div>
-      </div>
-      {% endif %}
-    {% endif %}
+    {%  if  link.network_name == "about" %}
+      {% include 'links/home/view/about.html' %}
+      <br>
     <!-- E-MAIL -->
-    {%  if key == "email" %}
-      {% if link %}
-      <div class="card text-center">
-        <div class="card-header">
-          E-mail
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ link.adress }}</h5>
-          <p class="card-text">{{ link.description }}</p>
-          <a href="{{ url_for('main.email', action='edit') }}" class="btn btn-primary">Edit</a>
-        </div>
-      </div>
-      {% endif %}
+    {% elif link.network_name == "email" %}
+      {% include 'links/home/view/email.html' %}
+      <br>
+    {% else %}
+    <!-- OTHER LINKS: FACEBOOK TWITTER INSTAGRAM -->
+      {% include 'links/home/view/common_view.html' %}
+      <br>
     {% endif %}
   {% endfor %}
 </div>
@@ -45,12 +30,15 @@
   <div align="center">
     <h4>Upgrade you card:</h4>
   </div>
-  <div class="d-grid gap-2 d-md-block">
-  {% for link in alinks %}
-    {% if link == "about" %}
-    <a class="btn btn-primary d-grid gap-2 col-6 mx-auto" href="{{ url_for('main.about', action='edit') }}" role="button">{{link}} Link</a>
+  {# ''' #}
+  {# Included here free and paid avaible links tempale #}
+  {# I think need else more list of paid links... #}
+  {# ''' #}
+  {% if free_links %}
+    {% include 'links/home/view/freelinks.html' %}
+    {% if not user.is_paying() %}
+      {% include 'links/home/view/postpaid.html' %}
     {% endif %}
-  {% endfor %}
-  </div>
+  {% endif %}
 </div>
 {% endblock %}

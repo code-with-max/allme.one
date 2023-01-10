@@ -4,6 +4,7 @@ from config import Config
 from app.extensions import db
 from app.extensions import login_manager
 from app.extensions import migrate
+from app.extensions import env
 
 
 def create_app(config_class=Config):
@@ -21,6 +22,9 @@ def create_app(config_class=Config):
     # Migrations
     migrate.init_app(app, db)
 
+    # Auto-escape
+
+    #
     # Register blueprints here
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)

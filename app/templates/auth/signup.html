@@ -3,11 +3,12 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<div class="container text-center">
 <form method="POST">
-    <h3 align="center">Sign Up</h3>
+    <h3>Sign Up</h3>
     <form>
         <div class="mb-3">
-          <label for="InputEmail1" class="form-label">Email address</label>
+          <label for="InputEmail" class="form-label">Email address</label>
           <input
             name="email" 
             type="email" 
@@ -33,13 +34,14 @@
             class="form-control" 
             id="InputPassword1">
         </div>
-        <div id="passwordHelpBlock" class="form-text" align="center">
+        <div id="passwordHelpBlock" class="form-text">
           Your password must be 8-20 characters long and must not contain spaces, special characters, or emoji.
         </div>
         <br>
-        <div align="center">
+        <div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
 </form>
+</div>
 {% endblock %}

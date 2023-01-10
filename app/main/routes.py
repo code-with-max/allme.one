@@ -1,11 +1,12 @@
 from flask import render_template
 from flask import redirect, url_for
 from flask import request
-from flask import flash
+# from flask import flash
 from flask_login import login_required, current_user
 from app.main import bp
 from app.extensions import db
 from app.models.links import Links
+from app.models.networks import networks_data
 
 
 @bp.route('/')
@@ -31,57 +32,21 @@ def list_of_links(unique_link):
 @bp.route('/home/')
 @login_required
 def home():
-    user_links = {}
-    grey_links = {}
-    avaible_links = []
-    postpaid_links = []
-    user_pay = True if current_user.payment_state != 'white' else False
-
-    flash(f'User payd status: {user_pay}', category='warning')
-
-    if current_user.links[0].about:
-        user_links['about'] = current_user.links[0].about[0]
-    else:
-        avaible_links.append('about')
-
-    if current_user.links[0].email:
-        user_links['email'] = current_user.links[0].email[0]
-    else:
-        avaible_links.append('email')
-
-    if current_user.links[0].twitter:
-        user_links['twitter'] = current_user.links[0].twitter[0]
-    else:
-        avaible_links.append('twitter')
-
-    if current_user.links[0].facebook:
-        user_links['facebook'] = current_user.links[0].facebook[0]
-    else:
-        avaible_links.append('facebook')
-
-    if current_user.links[0].vkontakte:
-        if user_pay:
-            user_links['vkontakte'] = current_user.links[0].vkontakte[0]
-        else:
-            grey_links['vkontakte'] = current_user.links[0].vkontakte[0]
-    else:
-        if user_pay:
-            avaible_links.append('vkontakte')
-        else:
-            postpaid_links.append('vkontakte')
-
+    ''' Draw control panel for logged user '''
+    used_links, free_links = current_user.links[0].get_links()
+    # I think need else more list of paid links...
     return render_template('home.html',
                            user=current_user,
-                           ulinks=user_links,
-                           glinks=grey_links,
-                           alinks=avaible_links,
-                           plinks=postpaid_links,
+                           used_links=used_links,
+                           free_links=free_links,
+                           networks=networks_data,
                            )
 
 
 @bp.route('/email/<action>/', methods=('GET', 'POST'))
 @login_required
 def email(action):
+    '''E-mail page edit'''
     if action == 'edit':
         email = current_user.links[0].email[0]
         if request.method == 'POST':
@@ -95,7 +60,7 @@ def email(action):
             db.session.commit()
 
             return redirect(url_for('main.home'))
-        return render_template('links/email_edit.html',
+        return render_template('links//home/edit/email.html',
                                email=email,
                                user=current_user,
                                )
@@ -104,12 +69,13 @@ def email(action):
 @bp.route('/about/<action>/', methods=('GET', 'POST'))
 @login_required
 def about(action):
+    '''About page edit'''
     if action == 'edit':
         if len(current_user.links[0].about) > 0:
             about = current_user.links[0].about[0]
         else:
             from app.models.links import About
-            about = About(name='', description='')
+            about = About(username='', description='')
             current_user.links[0].about.append(about)
             db.session.add(about)
             db.session.commit()
@@ -128,14 +94,37 @@ def about(action):
         name = request.form['user_name']
         description = request.form['description']
 
-        about.name = name
+        about.username = name
         about.description = description
 
         db.session.add(about)
         db.session.commit()
 
         return redirect(url_for('main.home'))
-    return render_template('links/about_edit.html',
+    return render_template('links/home/edit/about.html',
                            about=about,
                            user=current_user,
                            )
+
+
+def create_in_database(req):
+    if req == 'facebook':
+        from app.models.links import Facebook
+        new_link = Facebook(username='', network_name=req)
+        current_user.links[0].facebook.append(new_link)
+        db.session.add(new_link)
+        db.session.commit()
+
+    elif req == 'instagram':
+        from app.models.links import Instagram
+        new_link = Instagram(username='', network_name=req)
+        current_user.links[0].instagram.append(new_link)
+        db.session.add(new_link)
+        db.session.commit()
+
+    elif req == 'vkontakte':
+        from app.models.links import Vkontakte
+        new_link = Vkontakte(username='', network_name=req)
+        current_user.links[0].vkontakte.append(new_link)
+        db.session.add(new_link)
+        db.session.commit()

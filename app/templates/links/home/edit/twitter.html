@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Edit {{ social_network.get_title() }} account {% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST">
+        <div class="mb-3">
+            <label for="text" class="form-label">Your {{ social_network.get_title() }} account</label>
+            <input type="text" name="username" id="username" 
+                class="form-control"
+                value="{{ social_network.username }}"
+                placeholder="you username">
+        <div class="d-grid col-2">
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+    </form>
+    <br>
+    <div class="d-grid col-2">
+        <button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDangerZone" aria-expanded="false" aria-controls="collapseDangerZone">
+          Danger zone
+        </button>
+    </div>
+    <br>
+    <div style="min-height: 120px;">
+        <div class="collapse collapse-horizontal" id="collapseDangerZone">
+          <div>
+            <a href="{{ url_for('main.twitter', action='delete') }}" class="btn btn-primary">Delete</a>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
