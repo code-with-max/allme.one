@@ -12,9 +12,12 @@ class Links(db.Model):
     about = (db.relationship('About', backref='links'))
     email = (db.relationship('Email', backref='links'))
     twitter = (db.relationship('Twitter', backref='links'))
+    youtube = (db.relationship('Youtube', backref='links'))
     facebook = (db.relationship('Facebook', backref='links'))
     vkontakte = (db.relationship('Vkontakte', backref='links'))
     instagram = (db.relationship('Instagram', backref='links'))
+    buymeacoffe = (db.relationship('Buymeacoffe', backref='links'))
+    cloudtips = (db.relationship('Cloudtips', backref='links'))
 
     def __repr__(self) -> str:
         return f'Unique link: {self.unique_link}'
@@ -32,6 +35,9 @@ class Links(db.Model):
         elif req == 'twitter' and self.twitter:
             return self.twitter[0]
 
+        elif req == 'youtube' and self.twitter:
+            return self.youtube[0]
+
         elif req == 'facebook' and self.facebook:
             return self.facebook[0]
 
@@ -40,12 +46,20 @@ class Links(db.Model):
 
         elif req == 'instagram' and self.instagram:
             return self.instagram[0]
+
+        elif req == 'buymeacoffe' and self.buymeacoffe:
+            return self.buymeacoffe[0]
+
+        elif req == 'cloudtips' and self.cloudtips:
+            return self.cloudtips[0]
+
         else:
             return None
 
     def get_links(self):
         '''
-        Return [list] of first social links if it exist \n
+        1st return [list] of first social links if it exist \n
+        2nd rerurn [list] of free social links )if not exist) \n
         The method does not use the user's payment status. To check it, use: \n
         current_user.is_paying() - for check user payment status \n
         '''
@@ -54,25 +68,12 @@ class Links(db.Model):
         used.append(self.about[0]) if self.about else free.append('about')
         used.append(self.email[0]) if self.email else free.append('email')
         used.append(self.twitter[0]) if self.twitter else free.append('twitter')
+        used.append(self.youtube[0]) if self.youtube else free.append('youtube')
+        used.append(self.buymeacoffe[0]) if self.buymeacoffe else free.append('buymeacoffe')
         used.append(self.facebook[0]) if self.facebook else free.append('facebook')
-        used.append(self.vkontakte[0]) if self.vkontakte else free.append('vkontakte')
         used.append(self.instagram[0]) if self.instagram else free.append('instagram')
-        return [used, free]
-
-    def get_links_str(self):
-        '''
-        Return two list of social link in current list \n
-        1st - list of string of used social links (add user data); \n
-        2nd - list of strings of avaible social links (no user data);
-        '''
-        used = []
-        free = []
-        used.append('about') if self.about else free.append('about')
-        used.append('email') if self.email else free.append('email')
-        used.append('twitter') if self.twitter else free.append('twitter')
-        used.append('facebook') if self.facebook else free.append('facebook')
-        used.append('vkontakte') if self.vkontakte else free.append('vkontakte')
-        used.append('instagram') if self.vkontakte else free.append('instagram')
+        used.append(self.vkontakte[0]) if self.vkontakte else free.append('vkontakte')
+        used.append(self.cloudtips[0]) if self.cloudtips else free.append('cloudtips')
         return [used, free]
 
 
@@ -156,3 +157,33 @@ class Vkontakte(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<Vkontakte username: {self.username}>'
+
+
+class Youtube(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='youtube', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<YouTube username: {self.username}>'
+
+
+class Buymeacoffe(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='buymeacoffe', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<buymeacoffe username: {self.username}>'
+
+
+class Cloudtips(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='cloudtips', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<cloudtips username: {self.username}>'

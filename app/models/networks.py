@@ -22,4 +22,16 @@ networks_data = {
         'instagram': {'link': 'instagram.com',
                       'is_free': True,
                       },
+
+        'youtube': {'link': 'youtube.com',
+                    'is_free': True,
+                    },
+
+        'buymeacoffe': {'link': 'buymeacoffe.com',
+                         'is_free': True,
+                         },
+
+        'cloudtips': {'link': 'cloudtips.com',
+                      'is_free': True,
+                      },
         }

@@ -5,28 +5,28 @@ from flask import request
 from flask_login import login_required, current_user
 from app.main import bp
 from app.extensions import db
-from app.models.links import Facebook
+from app.models.links import Youtube
 # from app.models.networks import networks_data
 
 
-@bp.route('/facebook/<action>/', methods=('GET', 'POST'))
+@bp.route('/youtube/<action>/', methods=('GET', 'POST'))
 @login_required
-def facebook(action):
+def youtube(action):
     if action == 'edit':
-        if len(current_user.links[0].facebook) > 0:
-            facebook = current_user.links[0].facebook[0]
+        if len(current_user.links[0].youtube) > 0:
+            youtube = current_user.links[0].youtube[0]
         else:
-            facebook = Facebook(
+            youtube = Youtube(
                 username='',
                 )
-            current_user.links[0].facebook.append(facebook)
-            db.session.add(facebook)
+            current_user.links[0].youtube.append(youtube)
+            db.session.add(youtube)
             db.session.commit()
 
     elif action == 'delete':
-        if len(current_user.links[0].facebook) > 0:
-            facebook = current_user.links[0].facebook[0]
-            db.session.delete(facebook)
+        if len(current_user.links[0].youtube) > 0:
+            youtube = current_user.links[0].youtube[0]
+            db.session.delete(youtube)
             db.session.commit()
             return redirect(url_for('main.home'))
         else:
@@ -35,13 +35,13 @@ def facebook(action):
 
     if request.method == 'POST':
         username = request.form['username']
-        facebook.username = username
-        db.session.add(facebook)
+        youtube.username = username
+        db.session.add(youtube)
         db.session.commit()
         return redirect(url_for('main.home'))
 
     return render_template(
         'links/home/edit/common_edit.html',
-        social_media=facebook,
+        social_media=youtube,
         user=current_user,
         )

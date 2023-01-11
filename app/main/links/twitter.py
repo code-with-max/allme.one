@@ -41,7 +41,7 @@ def twitter(action):
         return redirect(url_for('main.home'))
 
     return render_template(
-        'links/home/edit/twitter.html',
-        social_network=twitter,
+        'links/home/edit/common_edit.html',
+        social_media=twitter,
         user=current_user,
         )

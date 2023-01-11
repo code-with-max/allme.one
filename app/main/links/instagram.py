@@ -17,7 +17,7 @@ def instagram(action):
             instagram = current_user.links[0].instagram[0]
         else:
             instagram = Instagram(
-                username='You instagram username',
+                username='',
                 )
             current_user.links[0].instagram.append(instagram)
             db.session.add(instagram)
@@ -41,7 +41,7 @@ def instagram(action):
         return redirect(url_for('main.home'))
 
     return render_template(
-        'links/home/edit/instagram.html',
-        instagram=instagram,
+        'links/home/edit/common_edit.html',
+        social_media=instagram,
         user=current_user,
         )
