@@ -12,3 +12,4 @@ from app.main.links import instagram
 from app.main.links import youtube
 from app.main.links import cloudtips
 from app.main.links import buymeacoffe
+from app.main.links import boosty

@@ -1,11 +1,11 @@
 networks_data = {
         'about': {'link': '',
-                     'is_free': True,
-                     },
+                  'is_free': True,
+                  },
 
         'email': {'link': '',
-                     'is_free': True,
-                     },
+                  'is_free': True,
+                  },
 
         'facebook': {'link': 'facebook.com',
                      'is_free': True,
@@ -28,10 +28,14 @@ networks_data = {
                     },
 
         'buymeacoffe': {'link': 'buymeacoffe.com',
-                         'is_free': True,
-                         },
+                        'is_free': True,
+                        },
 
         'cloudtips': {'link': 'cloudtips.com',
                       'is_free': True,
                       },
+
+        'cboosty': {'link': 'boosty.to',
+                    'is_free': False,
+                    },
         }

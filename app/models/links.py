@@ -18,6 +18,7 @@ class Links(db.Model):
     instagram = (db.relationship('Instagram', backref='links'))
     buymeacoffe = (db.relationship('Buymeacoffe', backref='links'))
     cloudtips = (db.relationship('Cloudtips', backref='links'))
+    boosty = (db.relationship('Boosty', backref='links'))
 
     def __repr__(self) -> str:
         return f'Unique link: {self.unique_link}'
@@ -53,6 +54,9 @@ class Links(db.Model):
         elif req == 'cloudtips' and self.cloudtips:
             return self.cloudtips[0]
 
+        elif req == 'boosty' and self.boosty:
+            return self.boosty[0]
+
         else:
             return None
 
@@ -69,6 +73,7 @@ class Links(db.Model):
         used.append(self.email[0]) if self.email else free.append('email')
         used.append(self.twitter[0]) if self.twitter else free.append('twitter')
         used.append(self.youtube[0]) if self.youtube else free.append('youtube')
+        used.append(self.boosty[0]) if self.boosty else free.append('boosty')
         used.append(self.buymeacoffe[0]) if self.buymeacoffe else free.append('buymeacoffe')
         used.append(self.facebook[0]) if self.facebook else free.append('facebook')
         used.append(self.instagram[0]) if self.instagram else free.append('instagram')
@@ -187,3 +192,13 @@ class Cloudtips(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<cloudtips username: {self.username}>'
+
+
+class Boosty(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='boosty', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<boosty username: {self.username}>'
