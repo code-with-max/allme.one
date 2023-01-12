@@ -278,3 +278,4 @@ poetry.toml
 ### Fleet ###
 .fleet/*
 !.fleet/run.json
+!.fleet/settings.json
