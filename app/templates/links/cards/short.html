@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Links{% endblock %}
+
+{% block content %}
+
+<div class="d-grid gap-2 col-6 mx-auto">
+{% for link in links %}  
+    {% if link.network_name == 'email' %}
+        <a href="mailto:{{link.adress}}" class="btn btn-outline-primary">Write a letter</a>
+        <br>
+    {% elif link.network_name == 'about' %}
+    <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{ link.username }}</h5>
+          <p class="card-text">{{ link.description }}</p>
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        </div>
+      </div>
+    {% else %}
+    <a href="{{ link.get_title() }}" class="btn btn-outline-primary">
+        <i class="ti ti-brand-{{link.network_name}}"></i>
+        {{ link.get_title() }}
+    </a>
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock %}

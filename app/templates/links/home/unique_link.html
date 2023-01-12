@@ -1,0 +1,13 @@
+<div class="card text-center">
+    <div class="card-header">
+      You personal card link
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ user.links[0].unique_link }}</h5>
+      <p class="card-text"></p>
+      <a href="{{ url_for('main.list_of_links', unique_link=user.links[0].unique_link) }}" class="btn btn-primary">Open in new tab</a>
+    </div>
+    <div class="card-footer text-muted">
+      2 days ago
+    </div>
+</div>

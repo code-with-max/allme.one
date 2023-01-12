@@ -18,9 +18,10 @@ def index():
 
 @bp.route('/<unique_link>/')
 def list_of_links(unique_link):
-    user_links = Links.query.filter_by(unique_link=unique_link).first_or_404()
-    if user_links:
-        return render_template("list_of_links.html",
+    user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
+    if user_list:
+        user_links, free_links = user_list.get_links()
+        return render_template("links/cards/short.html",
                                user=current_user,
                                links=user_links,
                                )

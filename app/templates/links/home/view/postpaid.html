@@ -8,7 +8,7 @@
         <div class="d-grid gap-2 col-6 mx-auto">
         {% for link in free_links %}
             {% if not networks[link]['is_free'] %}
-                <button type="button" class="btn btn-primary" disabled>
+                <button type="button" class="btn btn-outline-primary" disabled>
                     <i class="ti ti-brand-{{link}}"></i>  {{ link }}
                 </button>
             {% endif %}

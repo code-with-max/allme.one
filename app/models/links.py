@@ -60,17 +60,16 @@ class Links(db.Model):
         else:
             return None
 
-    def get_links(self):
+    def get_links(self) -> list:
         '''
         1st return [list] of first social links if it exist \n
-        2nd rerurn [list] of free social links )if not exist) \n
+        2nd rerurn [list] of free social links (if link not exist) \n
         The method does not use the user's payment status. To check it, use: \n
         current_user.is_paying() - for check user payment status \n
         '''
         used = []
         free = []
         used.append(self.about[0]) if self.about else free.append('about')
-        used.append(self.email[0]) if self.email else free.append('email')
         used.append(self.twitter[0]) if self.twitter else free.append('twitter')
         used.append(self.youtube[0]) if self.youtube else free.append('youtube')
         used.append(self.boosty[0]) if self.boosty else free.append('boosty')
@@ -79,6 +78,7 @@ class Links(db.Model):
         used.append(self.instagram[0]) if self.instagram else free.append('instagram')
         used.append(self.vkontakte[0]) if self.vkontakte else free.append('vkontakte')
         used.append(self.cloudtips[0]) if self.cloudtips else free.append('cloudtips')
+        used.append(self.email[0]) if self.email else free.append('email')
         return [used, free]
 
 

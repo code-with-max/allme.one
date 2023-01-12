@@ -35,7 +35,7 @@ networks_data = {
                       'is_free': True,
                       },
 
-        'cboosty': {'link': 'boosty.to',
-                    'is_free': False,
-                    },
+        'boosty': {'link': 'boosty.to',
+                   'is_free': False,
+                   },
         }

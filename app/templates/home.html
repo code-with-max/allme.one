@@ -3,6 +3,11 @@
 {% block title %}My page{% endblock %}
 
 {% block content %}
+<!-- SHARE LINKS -->
+<div class="container">
+  {% include 'links/home/unique_link.html' %}
+</div>
+<br>
 <!-- User added links -->
 {# ''' #}
 {# using list of strings #}
@@ -19,7 +24,7 @@
       {% include 'links/home/view/email.html' %}
       <br>
     {% else %}
-    <!-- OTHER LINKS: FACEBOOK TWITTER INSTAGRAM -->
+    <!-- OTHER LINKS: FACEBOOK TWITTER INSTAGRAM etc-->
       {% include 'links/home/view/common_view.html' %}
       <br>
     {% endif %}
