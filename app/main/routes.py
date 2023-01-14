@@ -17,13 +17,24 @@ def index():
 
 
 @bp.route('/<unique_link>/')
-def list_of_links(unique_link):
+def short_list_of_links(unique_link):
     user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
     if user_list:
+        data = {}
         user_links, free_links = user_list.get_links()
+        for link in user_links:
+            full_url = networks_data[link.network_name]['url'] + str(link.username)
+            data[str(link.network_name)] = {
+                    'full_url': full_url,
+                    'username': link.username,
+                    'title': link.get_title(),
+                    }
+        print(data)
         return render_template("links/cards/short.html",
                                user=current_user,
                                links=user_links,
+                               networks_data=networks_data,
+                               nlinks=data,
                                )
     else:
         # Need redirect to 404 page!

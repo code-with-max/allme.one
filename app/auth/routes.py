@@ -49,10 +49,15 @@ def login():
 @bp.route('/logout/')
 @login_required
 def logout():
+    unique_link = current_user.get_list().unique_link
     logout_user()
     # Need delete this flash message
-    flash(f'Is_authenticated: {current_user.is_authenticated}')
-    return redirect(url_for("main.index"))
+    # flash(f'Is_authenticated: {current_user.is_authenticated}')
+    return redirect(url_for(
+                        "main.short_list_of_links",
+                        unique_link=unique_link
+                        )
+                    )
 
 
 @bp.route('/signup/', methods=['GET', 'POST'])
@@ -70,7 +75,7 @@ def signup():
         elif password1 != password2:
             flash("Passwords dont match", category='warning')
         else:
-            user_email = Email(adress=request_email)
+            user_email = Email(username=request_email)
             user_links = Links(email=[user_email],
                                unique_link=get_random_link(9),
                                )
@@ -85,4 +90,8 @@ def signup():
             flash("User created", category='success')
             return redirect(url_for('main.home'))
 
-    return render_template('auth/signup.html', user=current_user)
+    return render_template(
+                    'auth/signup.html',
+                    user=current_user,
+                    centered_view=True,
+                    )

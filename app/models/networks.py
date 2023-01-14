@@ -1,41 +1,41 @@
 networks_data = {
-        'about': {'link': '',
+        'about': {'url': '',
                   'is_free': True,
                   },
 
-        'email': {'link': '',
+        'email': {'url': 'mailto:',
                   'is_free': True,
                   },
 
-        'facebook': {'link': 'facebook.com',
+        'facebook': {'url': 'facebook.com',
                      'is_free': True,
                      },
 
-        'twitter': {'link': 'twitter.com',
+        'twitter': {'url': 'https://twitter.com/',
                     'is_free': True,
                     },
 
-        'vkontakte': {'link': 'vkontakte.com',
-                      'is_free': False,
-                      },
+        'vk': {'url': 'vkontakte.com',
+               'is_free': False,
+               },
 
-        'instagram': {'link': 'instagram.com',
+        'instagram': {'url': 'instagram.com',
                       'is_free': True,
                       },
 
-        'youtube': {'link': 'youtube.com',
+        'youtube': {'url': 'http://youtube.com/@',
                     'is_free': True,
                     },
 
-        'buymeacoffe': {'link': 'buymeacoffe.com',
+        'buymeacoffe': {'url': 'buymeacoffe.com',
                         'is_free': True,
                         },
 
-        'cloudtips': {'link': 'cloudtips.com',
+        'cloudtips': {'url': 'cloudtips.com',
                       'is_free': True,
                       },
 
-        'boosty': {'link': 'boosty.to',
+        'boosty': {'url': 'boosty.to',
                    'is_free': False,
                    },
         }

@@ -76,7 +76,7 @@ class Links(db.Model):
         used.append(self.buymeacoffe[0]) if self.buymeacoffe else free.append('buymeacoffe')
         used.append(self.facebook[0]) if self.facebook else free.append('facebook')
         used.append(self.instagram[0]) if self.instagram else free.append('instagram')
-        used.append(self.vkontakte[0]) if self.vkontakte else free.append('vkontakte')
+        used.append(self.vkontakte[0]) if self.vkontakte else free.append('vk')
         used.append(self.cloudtips[0]) if self.cloudtips else free.append('cloudtips')
         used.append(self.email[0]) if self.email else free.append('email')
         return [used, free]
@@ -103,21 +103,20 @@ class About(db.Model, SocialNetwork):
     links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(network_name='about', **kwargs,)
+        super().__init__(network_name='about', **kwargs)
 
     def __repr__(self) -> str:
         return f'<User name: {self.username}>'
 
 
 class Email(db.Model, SocialNetwork):
-    adress = db.Column(db.String(160), default="no@one.ru")
     links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(network_name='email', **kwargs,)
+        super().__init__(network_name='email', **kwargs)
 
     def __repr__(self) -> str:
-        return f'<E-mail adress: {self.adress}>'
+        return f'<E-mail adress: {self.username}>'
 
 
 class Twitter(db.Model, SocialNetwork):
@@ -128,7 +127,7 @@ class Twitter(db.Model, SocialNetwork):
     links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(network_name='twitter', **kwargs,)
+        super().__init__(network_name='twitter', **kwargs)
 
     def __repr__(self) -> str:
         return f'<Twitter username: {self.username}>'
@@ -158,7 +157,7 @@ class Vkontakte(db.Model, SocialNetwork):
     links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(network_name='vkontakte', **kwargs)
+        super().__init__(network_name='vk', **kwargs)
 
     def __repr__(self) -> str:
         return f'<Vkontakte username: {self.username}>'
