@@ -91,8 +91,9 @@ class SocialNetwork():
     '''
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(160))
+    about = db.Column(db.String(32))
     network_name = db.Column(db.String(16))
-    description = db.Column(db.String(255), default='Tell something about')
+    description = db.Column(db.String(255))
 
     def get_title(self):
         # Need capitalise first letter

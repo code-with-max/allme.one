@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     created_date = db.Column(db.DateTime(timezone=True), default=func.now())
     payment_state = db.Column(db.String(12), default='white')
     payment_date = db.Column(db.DateTime(timezone=True))
+    payment_UUID = db.Column(db.String(36))
     API_key = db.Column(db.String(64))
     # unique_link = db.Column(db.String(12), unique=True)
     links = db.relationship('Links', backref='user')
