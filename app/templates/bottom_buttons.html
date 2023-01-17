@@ -3,7 +3,7 @@
     <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Home page</a>
     <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-secondary">Logout</a>
     {% else %}
-        {% if not user_paying %}
+        {% if not list_user_paying %}
         <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">Main page</a>
         {% endif %}
     {% endif %}
