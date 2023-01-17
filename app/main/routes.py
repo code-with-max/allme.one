@@ -34,6 +34,7 @@ def short_list_of_links(unique_link):
                                networks_data=networks_data,
                                links_data=data,
                                user_paiyng=user_list.user.is_paying(),
+                               visitor_logged=current_user.is_authenticated
                                )
     else:
         # Need redirect to 404 page!
