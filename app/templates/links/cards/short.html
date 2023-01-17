@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="d-grid gap-2 col-6 mx-auto">
-{% for link, value in nlinks.items() %}
+{% for link, value in links_data.items() %}
   {% if link == 'about' %}
     {{ link }}
   {% else %}
@@ -16,5 +16,12 @@
     <br>
   {% endif %}
 {% endfor %}
+</div>
+</br>
+<div>
+  {% include 'bottom_buttons.html' %}
+  {% if not user_paying %}
+    {% include 'bottom_about.html' %}
+  {% endif %}
 </div>
 {% endblock %}

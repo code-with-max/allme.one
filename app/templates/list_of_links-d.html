@@ -4,7 +4,6 @@
 
 {% block content %}
 
-
 {% for link in links %}
   {% if link.network_name == 'email' %}
   <div class="card text-center">
@@ -25,4 +24,6 @@
   {% endif %}
 {% endfor %}
 
+{% include 'bottom_about.html' %}
+123456789
 {% endblock %}

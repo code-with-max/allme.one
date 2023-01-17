@@ -15,16 +15,16 @@ class User(db.Model, UserMixin):
     # unique_link = db.Column(db.String(12), unique=True)
     links = db.relationship('Links', backref='user')
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'<e-mail: "{self.email}", user_links: {self.links}>'
 
-    def is_paying(self) :
+    def is_paying(self) -> bool:
         ''' Return boolean user payment status'''
         if self.payment_state != 'white':
             return True
         else:
             return False
 
-    def get_list(self):
+    def get_list(self) -> object:
         ''' Return first list of links from data base '''
         return self.links[0]

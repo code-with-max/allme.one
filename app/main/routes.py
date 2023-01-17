@@ -13,7 +13,7 @@ from app.models.networks import networks_data
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
-    return render_template("index.html", user=current_user)
+    return render_template("index.html", centered_view=True)
 
 
 @bp.route('/<unique_link>/')
@@ -23,7 +23,7 @@ def short_list_of_links(unique_link):
         data = {}
         user_links, free_links = user_list.get_links()
         for link in user_links:
-            full_url = networks_data[link.network_name]['url'] + str(link.username)
+            full_url = networks_data[link.network_name]['url'] + link.username
             data[str(link.network_name)] = {
                     'full_url': full_url,
                     'username': link.username,
@@ -31,10 +31,9 @@ def short_list_of_links(unique_link):
                     }
         print(data)
         return render_template("links/cards/short.html",
-                               user=current_user,
-                               links=user_links,
                                networks_data=networks_data,
-                               nlinks=data,
+                               links_data=data,
+                               user_paiyng=user_list.user.is_paying(),
                                )
     else:
         # Need redirect to 404 page!
