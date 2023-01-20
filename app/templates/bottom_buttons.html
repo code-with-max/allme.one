@@ -1,9 +1,9 @@
 <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
-    {% if visitor_logged %}
+    {% if visitor_authenticated %}
     <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Home page</a>
     <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-secondary">Logout</a>
     {% else %}
-        {% if not list_user_paying %}
+        {% if not visitor_paying %}
         <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">Main page</a>
         {% endif %}
     {% endif %}

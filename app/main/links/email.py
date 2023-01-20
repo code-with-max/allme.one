@@ -13,10 +13,10 @@ def email(action):
     if action == 'edit':
         email = current_user.links[0].email[0]
         if request.method == 'POST':
-            adress = request.form['adress']
+            about = request.form['about']
             description = request.form['description']
 
-            email.adress = adress
+            email.about = about
             email.description = description
 
             db.session.add(email)

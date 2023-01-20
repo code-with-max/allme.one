@@ -3,24 +3,18 @@
 {% block title %}Links{% endblock %}
 
 {% block content %}
-
-<div class="d-grid gap-2 col-6 mx-auto">
-{% for link, value in links_data.items() %}
-  {% if link == 'about' %}
-    {{ link }}
-  {% else %}
-  <a href="{{ value['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
-    <i class="ti ti-brand-{{ link }}"></i>
-        {{ value['title'] }}
-    </a>    
-    <br>
-  {% endif %}
+<div>
+<div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+{% for keys, data in links_data.items() %}
+  {{ keys }} <br> {{ data }}
+  <br>
 {% endfor %}
 </div>
-</br>
 <div>
+  visitor_authenticated: {{ visitor_authenticated }} <br>
+  visitor_paying: {{ visitor_paying }} <br>
   {% include 'bottom_buttons.html' %}
-  {% if not list_user_paying %}
+  {% if not visitor_paying %}
     {% include 'bottom_about.html' %}
   {% endif %}
 </div>

@@ -85,9 +85,15 @@ class Links(db.Model):
 class SocialNetwork():
     '''
     Helper Class for implement user social networks link \n
-    Requred named parameters:
-    username
-    network_name
+    Requred named parameters: username \n
+    Avaible groups: \n
+    sm - social media,
+    ms - messengers,
+    dw - donations world,
+    dr - donation Russia,
+    em - emails,
+    pe - personal links,
+    in - info (About etc..)
     '''
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(160))

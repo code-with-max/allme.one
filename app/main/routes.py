@@ -7,6 +7,7 @@ from app.main import bp
 from app.extensions import db
 from app.models.links import Links
 from app.models.networks import networks_data
+from app.main.collector import collect_links_data
 
 
 @bp.route('/')
@@ -18,27 +19,23 @@ def index():
 
 @bp.route('/<unique_link>/')
 def short_list_of_links(unique_link):
-    user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
-    if user_list:
-        data = {}
-        user_links, free_links = user_list.get_links()
-        for link in user_links:
-            full_url = networks_data[link.network_name]['url'] + link.username
-            data[str(link.network_name)] = {
-                    'full_url': full_url,
-                    'username': link.username,
-                    'title': link.get_title(),
-                    }
-        print(data)
-        return render_template("links/cards/short.html",
-                               networks_data=networks_data,
-                               links_data=data,
-                               list_user_paiyng=user_list.user.is_paying(),
-                               visitor_logged=current_user.is_authenticated
-                               )
+    '''
+    Generate short list of user links by unique identifer \n
+    Avaible groups for filtering: \n
+    '''
+    links_data = collect_links_data(unique_link)
+    if current_user.is_authenticated:
+        visitor_authenticated = True
+        visitor_paying = current_user.is_paying()
     else:
-        # Need redirect to 404 page!
-        return '<h1> oops... somethin wrong </h1>'
+        visitor_authenticated = False
+        visitor_paying = False
+
+    return render_template("links/cards/short.html",
+                           links_data=links_data,
+                           visitor_authenticated=visitor_authenticated,
+                           visitor_paying=visitor_paying,
+                           )
 
 
 @bp.route('/home/')

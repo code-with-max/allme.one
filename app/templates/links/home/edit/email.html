@@ -3,23 +3,31 @@
 {% block title %}Edit email{% endblock %}
 
 {% block content %} 
-<div class="container">
+<div class="container text-center">
     <form method="POST">
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" name="adress" id="adress"
+            <input type="email" name="username" id="username"
                 class="form-control" 
-                value="{{ email.adress }}"
-                placeholder="name@example.com">
+                value="{{ email.username }}"
+                disabled readonly>
+        </div>
+        <div class="mb-3">
+            <label for="text" class="form-label">About</label>
+            <input type="text" name="about" id="about" 
+                class="form-control" 
+                value="{{ email.about }}" 
+                placeholder="32 symbols">
+        </div>
         <div class="mb-3">
             <label for="text" class="form-label">Description</label>
             <input type="text" name="description" id="description" 
                 class="form-control" 
                 value="{{ email.description }}" 
-                placeholder="description">
+                placeholder="">
         </div>
-        <div align="center">
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <div>
+            <button type="submit" class="btn btn-primary">Confirm</button>
         </div>
     </form>
 </div>
