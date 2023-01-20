@@ -53,4 +53,10 @@ networks_data = {
                     'is_free': True,
                     'group': 'messengers',
                     },
+
+       'github': {'url': 'https://github.com/',
+                  'is_free': True,
+                  'group': 'social_media',
+                  },
+
               }

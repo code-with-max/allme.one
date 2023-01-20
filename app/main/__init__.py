@@ -14,3 +14,4 @@ from app.main.links import cloudtips
 from app.main.links import buymeacoffe
 from app.main.links import boosty
 from app.main.links import telegram
+from app.main.links import github
