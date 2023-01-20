@@ -32,6 +32,9 @@ def create_app(config_class=Config):
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
+    from app.api2 import bp as api2_bp
+    app.register_blueprint(api2_bp, url_prefix='/api2')
+
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))

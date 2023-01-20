@@ -10,13 +10,6 @@ from app.models.networks import networks_data
 from app.main.collector import collect_links_data
 
 
-@bp.route('/')
-def index():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
-    return render_template("index.html", centered_view=True)
-
-
 @bp.route('/<unique_link>/')
 def short_list_of_links(unique_link):
     '''
@@ -38,6 +31,12 @@ def short_list_of_links(unique_link):
                            )
 
 
+@bp.route('/api2/')
+def api2():
+    links_data = collect_links_data(unique_link)
+    return render_template('api2.html')
+
+
 @bp.route('/home/')
 @login_required
 def home():
@@ -50,3 +49,10 @@ def home():
                            free_links=free_links,
                            networks=networks_data,
                            )
+
+
+@bp.route('/')
+def index():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
+    return render_template("index.html", centered_view=True)

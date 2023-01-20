@@ -1,5 +1,5 @@
+{% if visitor_authenticated %}
 <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
-    {% if visitor_authenticated %}
     <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Home page</a>
     <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-secondary">Logout</a>
     {% else %}

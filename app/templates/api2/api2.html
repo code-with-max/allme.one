@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}API{% endblock %}
+
+{% block content %}
+<div class="card text-center">
+  <div class="card-body">
+    !!! TEST PART. DELETE IN PROD <br>
+    {% for keys, data in links_data.items() %}
+      {{ keys }} <br>
+      {% for key, link in data.items() %}
+      {{ key }} <br> {{ link }} <br>
+      {% endfor %}
+      <br>
+    {% endfor %}
+  </div>
+</div>
+</br>
+<div class="card text-center">
+  <div class="card-body">
+    !!! TEST PART. DELETE IN PROD <br>
+    visitor_authenticated: {{ visitor_authenticated }} <br>
+    visitor_paying: {{ visitor_paying }} <br>
+  </div>
+</div>
+{% endblock %}

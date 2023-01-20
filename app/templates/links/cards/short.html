@@ -3,20 +3,6 @@
 {% block title %}card{% endblock %}
 
 {% block content %}
-<div class="card text-center">
-  <div class="card-body">
-    !!! TEST PART. DELETE IN PROD <br>
-    {% for keys, data in links_data.items() %}
-      {{ keys }} <br>
-      {% for key, link in data.items() %}
-      {{ key }} <br> {{ link }} <br>
-      {% endfor %}
-      <br>
-    {% endfor %}
-  </div>
-</div>
-</br>
---------------------------------
 <!-- INFO (about, etc) -->
 {% if links_data['information'] %}
   {% set info = links_data['information']['about'] %}
@@ -50,18 +36,16 @@
 </div>
 {% endif %}
 </br>
-<div class="card text-center">
+<!-- Bottom buttons -->
+<div class="card">
   <div class="card-body">
-    !!! TEST PART. DELETE IN PROD <br>
-    visitor_authenticated: {{ visitor_authenticated }} <br>
-    visitor_paying: {{ visitor_paying }} <br>
+  {% include 'bottom_buttons.html' %}
   </div>
 </div>
-</br>
-<div>
-  {% include 'bottom_buttons.html' %}
-  {% if not visitor_paying %}
-    {% include 'bottom_about.html' %}
-  {% endif %}
-</div>
+<!-- Bottom links -->
+{% if not visitor_paying %}
+  <div>
+  {% include 'bottom_about.html' %}
+  </div>
+{% endif %}
 {% endblock %}
