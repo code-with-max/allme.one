@@ -1,25 +1,64 @@
 {% extends "base.html" %}
 
-{% block title %}Links{% endblock %}
+{% block title %}card{% endblock %}
 
 {% block content %}
-<div>
-<div class="d-grid gap-2 col-{{ button_size }} mx-auto">
-{% for keys, data in links_data.items() %}
-  {{ keys }} <br>
-  {% for key, link in data.items() %}
-  {{ key }} <br> {{ link }} <br>
-  {% endfor %}
-  <br>
-{% endfor %}
+<div class="card text-center">
+  <div class="card-body">
+    !!! TEST PART. DELETE IN PROD <br>
+    {% for keys, data in links_data.items() %}
+      {{ keys }} <br>
+      {% for key, link in data.items() %}
+      {{ key }} <br> {{ link }} <br>
+      {% endfor %}
+      <br>
+    {% endfor %}
+  </div>
+</div>
+</br>
 --------------------------------
-<div>
-  {{ links_data['information'] }}
+<!-- INFO (about, etc) -->
+{% if links_data['information'] %}
+  {% set info = links_data['information']['about'] %}
+  <div class="card text-center">
+    <div class="card-header">
+      {{ info['about'] }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ info['username'] }}</h5>
+      <p class="card-text">{{ info['description'] }}</p>
+    </div>
+  </div>
+{% endif %}
+<br>
+<!-- Social media -->
+{% if links_data['social_media'] %}
+<div class="card text-center">
+  <div class="card-header">
+    Social media
+  </div>
+  <div class="card-body">
+    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+      {% for key, data in links_data['social_media'].items() %}
+      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+        <i class="ti ti-brand-{{ key }}"></i>
+        {{ key }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
 </div>
+{% endif %}
+</br>
+<div class="card text-center">
+  <div class="card-body">
+    !!! TEST PART. DELETE IN PROD <br>
+    visitor_authenticated: {{ visitor_authenticated }} <br>
+    visitor_paying: {{ visitor_paying }} <br>
+  </div>
 </div>
+</br>
 <div>
-  visitor_authenticated: {{ visitor_authenticated }} <br>
-  visitor_paying: {{ visitor_paying }} <br>
   {% include 'bottom_buttons.html' %}
   {% if not visitor_paying %}
     {% include 'bottom_about.html' %}

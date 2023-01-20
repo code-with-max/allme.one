@@ -19,6 +19,7 @@ class Links(db.Model):
     buymeacoffe = (db.relationship('Buymeacoffe', backref='links'))
     cloudtips = (db.relationship('Cloudtips', backref='links'))
     boosty = (db.relationship('Boosty', backref='links'))
+    telegram = (db.relationship('Telegram', backref='links'))
 
     def __repr__(self) -> str:
         return f'Unique link: {self.unique_link}'
@@ -57,6 +58,9 @@ class Links(db.Model):
         elif req == 'boosty' and self.boosty:
             return self.boosty[0]
 
+        elif req == 'telegram' and self.telegram:
+            return self.telegram[0]
+
         else:
             return None
 
@@ -64,8 +68,8 @@ class Links(db.Model):
         '''
         1st return [list] of first social links if it exist \n
         2nd rerurn [list] of free social links (if link not exist) \n
-        The method does not use the user's payment status. To check it, use: \n
-        current_user.is_paying() - for check user payment status \n
+        The method does not use the user's payment status \n
+        current_user.is_paying() - for check it
         '''
         used = []
         free = []
@@ -79,6 +83,7 @@ class Links(db.Model):
         used.append(self.vkontakte[0]) if self.vkontakte else free.append('vk')
         used.append(self.cloudtips[0]) if self.cloudtips else free.append('cloudtips')
         used.append(self.email[0]) if self.email else free.append('email')
+        used.append(self.telegram[0]) if self.telegram else free.append('telegram')
         return [used, free]
 
 
@@ -86,14 +91,6 @@ class SocialNetwork():
     '''
     Helper Class for implement user social networks link \n
     Requred named parameters: username \n
-    Avaible groups: \n
-    sm - social media,
-    ms - messengers,
-    dw - donations world,
-    dr - donation Russia,
-    em - emails,
-    pe - personal links,
-    in - info (About etc..)
     '''
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(160))
@@ -113,7 +110,7 @@ class About(db.Model, SocialNetwork):
         super().__init__(network_name='about', **kwargs)
 
     def __repr__(self) -> str:
-        return f'<User name: {self.username}>'
+        return f'<(about) User name: {self.username}>'
 
 
 class Email(db.Model, SocialNetwork):
@@ -208,3 +205,13 @@ class Boosty(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<boosty username: {self.username}>'
+
+
+class Telegram(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='telegram', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<telegram username: {self.username}>'
