@@ -44,4 +44,5 @@ def instagram(action):
         'links/home/edit/common_edit.html',
         social_media=instagram,
         user=current_user,
+        centered_view=True,
         )

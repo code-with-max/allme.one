@@ -17,6 +17,24 @@
   </div>
 {% endif %}
 <br>
+<!-- Messengers -->
+{% if links_data['messengers'] %}
+<div class="card text-center">
+  <div class="card-header">
+    Messengers
+  </div>
+  <div class="card-body">
+    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+      {% for key, data in links_data['messengers'].items() %}
+      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+        <i class="ti ti-brand-{{ key }}"></i>
+        {{ key }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
 <!-- Social media -->
 {% if links_data['social_media'] %}
 <div class="card text-center">
@@ -43,7 +61,7 @@
   </div>
 </div>
 <!-- Bottom links -->
-{% if not visitor_paying %}
+{% if not owner_is_paying %}
   <div>
   {% include 'bottom_about.html' %}
   </div>

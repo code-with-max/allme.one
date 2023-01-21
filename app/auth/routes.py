@@ -43,7 +43,10 @@ def login():
         else:
             flash("Email does not exist", category='warning')
 
-    return render_template('auth/login.html', user=current_user)
+    return render_template('auth/login.html',
+                           user=current_user,
+                           centered_view=True,
+                           )
 
 
 @bp.route('/logout/')

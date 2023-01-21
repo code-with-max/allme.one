@@ -81,7 +81,6 @@ class Links(db.Model):
         used.append(self.github[0]) if self.github else free.append('github')
         used.append(self.youtube[0]) if self.youtube else free.append('youtube')
         used.append(self.twitter[0]) if self.twitter else free.append('twitter')
-        used.append(self.youtube[0]) if self.youtube else free.append('youtube')
         used.append(self.boosty[0]) if self.boosty else free.append('boosty')
         used.append(self.buymeacoffe[0]) if self.buymeacoffe else free.append('buymeacoffe')
         used.append(self.facebook[0]) if self.facebook else free.append('facebook')

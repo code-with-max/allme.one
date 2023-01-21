@@ -44,4 +44,5 @@ def youtube(action):
         'links/home/edit/common_edit.html',
         social_media=youtube,
         user=current_user,
+        centered_view=True,
         )

@@ -44,4 +44,5 @@ def github(action):
         'links/home/edit/common_edit.html',
         social_media=github,
         user=current_user,
+        centered_view=True,
         )

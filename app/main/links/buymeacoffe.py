@@ -44,4 +44,5 @@ def buymeacoffe(action):
         'links/home/edit/common_edit.html',
         social_media=buymeacoffe,
         user=current_user,
+        centered_view=True,
         )

@@ -16,25 +16,17 @@ def short_list_of_links(unique_link):
     Generate short list of user links by unique identifer \n
     Avaible groups for filtering: \n
     '''
-    links_data = collect_links_data(unique_link)
+    links_data, owner_is_paying = collect_links_data(unique_link)
     if current_user.is_authenticated:
         visitor_authenticated = True
-        visitor_paying = current_user.is_paying()
     else:
         visitor_authenticated = False
-        visitor_paying = False
 
     return render_template("links/cards/short.html",
                            links_data=links_data,
                            visitor_authenticated=visitor_authenticated,
-                           visitor_paying=visitor_paying,
+                           owner_is_paying=owner_is_paying,
                            )
-
-
-@bp.route('/api2/')
-def api2():
-    links_data = collect_links_data(unique_link)
-    return render_template('api2.html')
 
 
 @bp.route('/home/')

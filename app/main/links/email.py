@@ -26,4 +26,5 @@ def email(action):
         return render_template('links//home/edit/email.html',
                                email=email,
                                user=current_user,
+                               centered_view=True,
                                )

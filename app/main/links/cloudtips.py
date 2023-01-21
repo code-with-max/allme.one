@@ -44,4 +44,5 @@ def cloudtips(action):
         'links/home/edit/common_edit.html',
         social_media=cloudtips,
         user=current_user,
+        centered_view=True,
         )

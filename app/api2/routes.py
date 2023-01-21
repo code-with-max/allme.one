@@ -13,7 +13,13 @@ from app.main.collector import collect_links_data
 @bp.route('/<unique_link>/')
 # Get func from main blueprint :(
 def short_list_of_links(unique_link):
-    links_data = collect_links_data(unique_link)
+    links_data, owner_is_paying = collect_links_data(unique_link)
+    if current_user.is_authenticated:
+        visitor_authenticated = True
+    else:
+        visitor_authenticated = False
     return render_template('api2/api2.html',
                            links_data=links_data,
+                           visitor_authenticated=visitor_authenticated,
+                           owner_is_paying=owner_is_paying,
                            )

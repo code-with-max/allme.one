@@ -44,4 +44,5 @@ def about(action):
     return render_template('links/home/edit/about.html',
                            about=about,
                            user=current_user,
+                           centered_view=True,
                            )

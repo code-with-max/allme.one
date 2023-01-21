@@ -44,4 +44,5 @@ def boosty(action):
         'links/home/edit/common_edit.html',
         social_media=boosty,
         user=current_user,
+        centered_view=True,
         )

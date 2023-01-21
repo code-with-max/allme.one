@@ -44,4 +44,5 @@ def facebook(action):
         'links/home/edit/common_edit.html',
         social_media=facebook,
         user=current_user,
+        centered_view=True,
         )

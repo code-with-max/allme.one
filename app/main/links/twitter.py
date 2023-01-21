@@ -44,4 +44,5 @@ def twitter(action):
         'links/home/edit/common_edit.html',
         social_media=twitter,
         user=current_user,
+        centered_view=True,
         )
