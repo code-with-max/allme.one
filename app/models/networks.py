@@ -19,7 +19,7 @@ networks_data = {
                    'group': 'social_media',
                    },
 
-       'vk': {'url': 'vkontakte.com',
+       'vk': {'url': 'https://vk.com/',
               'is_free': False,
               'group': 'social_media',
               },
@@ -34,22 +34,22 @@ networks_data = {
                    'group': 'social_media',
                    },
 
-       'buymeacoffe': {'url': 'buymeacoffe.com',
+       'buymeacoffe': {'url': 'https://www.buymeacoffee.com/',
                        'is_free': True,
                        'group': 'donate_world',
                        },
 
-       'cloudtips': {'url': 'cloudtips.com',
+       'cloudtips': {'url': 'https://pay.cloudtips.ru/p/',
                      'is_free': True,
                      'group': 'donate_russia',
                      },
 
-       'boosty': {'url': 'boosty.to',
+       'boosty': {'url': 'https://boosty.to/',
                   'is_free': False,
                   'group': 'donate_russia',
                   },
 
-       'telegram': {'url': 'https://telegram.net/@',
+       'telegram': {'url': 'https://t.me/',
                     'is_free': True,
                     'group': 'messengers',
                     },

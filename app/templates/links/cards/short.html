@@ -54,8 +54,26 @@
 </div>
 {% endif %}
 </br>
+<!-- E-mails -->
+{% if links_data['emails'] %}
+  {% set info = links_data['emails']['email'] %}
+  <div class="card text-center">
+    <div class="card-header">
+      {{ info['about'] }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ info['username'] }}</h5>
+      <p class="card-text">{{ info['description'] }}</p>
+      <a href="{{ info['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+        <i class="ti ti-at"></i>
+        Send E-mail
+      </a>
+    </div>
+  </div>
+{% endif %}
+<br>
 <!-- Bottom buttons -->
-{% include 'bottom_buttons.html' %}
+{% include '/links/cards/bottom_buttons.html' %}
 <!-- Bottom links -->
 {% if not owner_is_paying %}
   {% include 'bottom_about.html' %}

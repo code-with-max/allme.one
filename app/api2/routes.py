@@ -13,6 +13,7 @@ from app.main.collector import collect_links_data
 
 @bp.route('/getlist/', methods=['GET', 'POST'])
 # Get func from main blueprint :(
+    # OperationalError
 def short_list_of_links():
 
     if request.method == 'POST':

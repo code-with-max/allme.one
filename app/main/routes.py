@@ -16,6 +16,7 @@ def short_list_of_links(unique_link):
     Generate short list of user links by unique identifer \n
     Avaible groups for filtering: \n
     '''
+    # OperationalError
     user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
 
     links_data, owner_is_paying = collect_links_data(user_list)
@@ -23,6 +24,10 @@ def short_list_of_links(unique_link):
         visitor_authenticated = True
     else:
         visitor_authenticated = False
+
+    # I can’t think about that right now. If I do,
+    # I’ll go crazy. I’ll think about that tomorrow
+    db.session.close()
 
     return render_template("links/cards/short.html",
                            links_data=links_data,
