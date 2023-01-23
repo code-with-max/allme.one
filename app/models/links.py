@@ -61,7 +61,7 @@ class Links(db.Model):
 
         elif req == 'telegram' and self.telegram:
             return self.telegram[0]
-        
+    
         elif req == 'github' and self.github:
             return self.github[0]
 

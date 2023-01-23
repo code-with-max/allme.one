@@ -1,12 +1,19 @@
 {% if visitor_authenticated %}
-<div class="d-grid gap-2 col-{{ button_size }} mx-auto">
-    <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Home page</a>
-    <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-secondary">Logout</a>
+<div class="card">
+    <div class="card-body">
+        <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+        <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Home page</a>
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-secondary">Logout</a>
+        </div>
+    </div>
 </div>
 {% else %}
     {% if not owner_is_paying %}
-    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
-        <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">Main page</a>
+    <div class="card">
+        <div class="card-body">
+            <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+            <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary">Main page</a>
+        </div>
     </div>
-{% endif %}
+    {% endif %}
 {% endif %}

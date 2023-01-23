@@ -55,15 +55,9 @@
 {% endif %}
 </br>
 <!-- Bottom buttons -->
-<div class="card">
-  <div class="card-body">
-  {% include 'bottom_buttons.html' %}
-  </div>
-</div>
+{% include 'bottom_buttons.html' %}
 <!-- Bottom links -->
 {% if not owner_is_paying %}
-  <div>
   {% include 'bottom_about.html' %}
-  </div>
 {% endif %}
 {% endblock %}

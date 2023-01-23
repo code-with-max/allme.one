@@ -5,30 +5,30 @@ from flask import request
 from flask_login import login_required, current_user
 from app.main import bp
 from app.extensions import db
-from app.models.links import Boosty
+from app.models.links import Vkontakte
 # from app.models.networks import networks_data
 
 
-@bp.route('/boosty/<action>/', methods=('GET', 'POST'))
+@bp.route('/vk/<action>/', methods=('GET', 'POST'))
 @login_required
-def boosty(action):
+def vk(action):
     if not current_user.is_paying():
         return '<h3> You must pay </h3>'
     if action == 'edit':
-        if len(current_user.links[0].boosty) > 0:
-            boosty = current_user.links[0].boosty[0]
+        if len(current_user.links[0].vkontakte) > 0:
+            vkontakte = current_user.links[0].vkontakte[0]
         else:
-            boosty = Boosty(
+            vkontakte = Vkontakte(
                 username='',
                 )
-            current_user.links[0].boosty.append(boosty)
-            db.session.add(boosty)
+            current_user.links[0].vkontakte.append(vkontakte)
+            db.session.add(vkontakte)
             db.session.commit()
 
     elif action == 'delete':
-        if len(current_user.links[0].boosty) > 0:
-            boosty = current_user.links[0].boosty[0]
-            db.session.delete(boosty)
+        if len(current_user.links[0].vkontakte) > 0:
+            vkontakte = current_user.links[0].vkontakte[0]
+            db.session.delete(vkontakte)
             db.session.commit()
             return redirect(url_for('main.home'))
         else:
@@ -37,14 +37,14 @@ def boosty(action):
 
     if request.method == 'POST':
         username = request.form['username']
-        boosty.username = username
-        db.session.add(boosty)
+        vkontakte.username = username
+        db.session.add(vkontakte)
         db.session.commit()
         return redirect(url_for('main.home'))
 
     return render_template(
         'links/home/edit/common_edit.html',
-        social_media=boosty,
+        social_media=vkontakte,
         user=current_user,
         centered_view=True,
         )

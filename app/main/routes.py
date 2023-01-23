@@ -16,7 +16,9 @@ def short_list_of_links(unique_link):
     Generate short list of user links by unique identifer \n
     Avaible groups for filtering: \n
     '''
-    links_data, owner_is_paying = collect_links_data(unique_link)
+    user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
+
+    links_data, owner_is_paying = collect_links_data(user_list)
     if current_user.is_authenticated:
         visitor_authenticated = True
     else:
