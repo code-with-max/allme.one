@@ -9,6 +9,7 @@ class Links(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     unique_link = db.Column(db.String(12), unique=True)
+    last_viewed = db.Column(db.DateTime(timezone=True))
     about = (db.relationship('About', backref='links'))
     email = (db.relationship('Email', backref='links'))
     twitter = (db.relationship('Twitter', backref='links'))

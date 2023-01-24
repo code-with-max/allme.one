@@ -9,10 +9,12 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(160), unique=True)
     password = db.Column(db.String(160))
     created_date = db.Column(db.DateTime(timezone=True), default=func.now())
+    last_visit = db.Column(db.DateTime(timezone=True))
     payment_state = db.Column(db.String(12), default='white')
     payment_date = db.Column(db.DateTime(timezone=True))
     payment_UUID = db.Column(db.String(36))
-    API_key = db.Column(db.String(64))
+    API_key = db.Column(db.String(12))
+    API_counter = db.Column(db.Integer, default=0)
     # unique_link = db.Column(db.String(12), unique=True)
     links = db.relationship('Links', backref='user')
 

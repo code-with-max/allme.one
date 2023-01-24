@@ -1,0 +1,30 @@
+{# Color mode setter for Bootstrap 5 #}
+{# https://getbootstrap.com/docs/5.3/customize/color-modes/#sass-usage #}
+
+{# May be I must using media queries#}
+{# https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme #}
+
+{# avaible parameters for setTheme('') #}
+{# 'light', 'dark', 'auto' #}
+
+<script>
+    /*!
+     * Color mode setter for Bootstrap 5
+     */
+    
+     (() => {
+      'use strict'
+    
+      const setTheme = function (theme) {
+        if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-bs-theme', 'dark')
+        } else {
+          document.documentElement.setAttribute('data-bs-theme', theme)
+        }
+      }
+    
+      setTheme('auto')
+    
+    })()
+    
+</script>
