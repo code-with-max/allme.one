@@ -22,6 +22,7 @@ class Links(db.Model):
     boosty = (db.relationship('Boosty', backref='links'))
     telegram = (db.relationship('Telegram', backref='links'))
     github = (db.relationship('Github', backref='links'))
+    playmarket = (db.relationship('Playmarket', backref='links'))
 
     def __repr__(self) -> str:
         return f'Unique link: {self.unique_link}'
@@ -62,9 +63,12 @@ class Links(db.Model):
 
         elif req == 'telegram' and self.telegram:
             return self.telegram[0]
-    
+
         elif req == 'github' and self.github:
             return self.github[0]
+
+        elif req == 'playmarket' and self.playmarket:
+            return self.playmarket[0]
 
         else:
             return None
@@ -80,6 +84,7 @@ class Links(db.Model):
         free = []
         used.append(self.about[0]) if self.about else free.append('about')
         used.append(self.github[0]) if self.github else free.append('github')
+        used.append(self.playmarket[0]) if self.playmarket else free.append('playmarket')
         used.append(self.youtube[0]) if self.youtube else free.append('youtube')
         used.append(self.twitter[0]) if self.twitter else free.append('twitter')
         used.append(self.boosty[0]) if self.boosty else free.append('boosty')
@@ -231,3 +236,13 @@ class Github(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<github username: {self.username}>'
+
+
+class Playmarket(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='playmarket', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<playmarket username: {self.username}>'

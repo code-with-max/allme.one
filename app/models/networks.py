@@ -56,7 +56,12 @@ networks_data = {
 
        'github': {'url': 'https://github.com/',
                   'is_free': True,
-                  'group': 'social_media',
+                  'group': 'development',
                   },
+
+       'playmarket': {'url': 'https://play.google.com/store/apps/developer?id=',
+                      'is_free': True,
+                      'group': 'development',
+                      },
 
               }
