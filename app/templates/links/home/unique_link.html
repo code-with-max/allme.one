@@ -1,6 +1,6 @@
 <div class="card text-center">
     <div class="card-header">
-      Your card link
+      Your personal card link
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ user.links[0].unique_link }}</h5>
@@ -8,6 +8,6 @@
       <a href="{{ url_for('main.short_list_of_links', unique_link=user.links[0].unique_link) }}" class="btn btn-primary">Open in new tab</a>
     </div>
     <div class="card-footer text-muted">
-      2 days ago
+      Share it!
     </div>
 </div>

@@ -111,7 +111,12 @@ class SocialNetwork():
 
     def get_title(self):
         # Need capitalise first letter
-        return self.network_name
+        if self.network_name == 'github':
+            return 'GitHub'
+        elif self.network_name == 'playmarket':
+            return 'Google Play'
+        else:
+            return self.network_name
 
 
 class About(db.Model, SocialNetwork):

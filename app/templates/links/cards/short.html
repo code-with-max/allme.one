@@ -5,14 +5,14 @@
 {% block content %}
 <!-- INFO (about, etc) -->
 {% if links_data['information'] %}
-  {% set info = links_data['information']['about'] %}
+  {% set data = links_data['information']['about'] %}
   <div class="card text-center">
     <div class="card-header">
-      {{ info['about'] }} Personal card
+      {{ data['about'] }} Personal card
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ info['username'] }}</h5>
-      <p class="card-text">{{ info['description'] }}</p>
+      <h5 class="card-title">{{ data['username'] }}</h5>
+      <p class="card-text">{{ data['description'] }}</p>
     </div>
   </div>
 </br>
@@ -28,7 +28,7 @@
       {% for key, data in links_data['messengers'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
         <i class="ti {{ data['icon'] }}"></i>
-        {{ key }}
+        {{ data['title'] }}
       </a>
       {% endfor %}
     </div>
@@ -47,7 +47,7 @@
       {% for key, data in links_data['development'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
         <i class="ti {{ data['icon'] }}"></i>
-        {{ key }}
+        {{ data['title'] }}
       </a>
       {% endfor %}
     </div>
@@ -66,7 +66,7 @@
       {% for key, data in links_data['social_media'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
         <i class="ti {{ data['icon'] }}"></i>
-        {{ key }}
+        {{ data['title'] }}
       </a>
       {% endfor %}
     </div>
@@ -85,7 +85,7 @@
       {% for key, data in links_data['donate_world'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
         <i class="ti {{ data['icon'] }}"></i>
-        {{ key }}
+        {{ data['title'] }}
       </a>
       {% endfor %}
     </div>
@@ -104,7 +104,7 @@
       {% for key, data in links_data['donate_russia'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
         <i class="ti {{ data['icon'] }}"></i>
-        {{ key }}
+        {{ data['title'] }}
       </a>
       {% endfor %}
     </div>
