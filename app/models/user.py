@@ -7,6 +7,7 @@ class User(db.Model, UserMixin):
     # __tablename__ = user
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(160), unique=True)
+    email_confirmed = db.Column(db.Bool, default=False)
     password = db.Column(db.String(160))
     created_date = db.Column(db.DateTime(timezone=True), default=func.now())
     last_visit = db.Column(db.DateTime(timezone=True))
