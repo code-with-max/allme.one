@@ -12,9 +12,10 @@ Jinja2==3.1.2
 Mako==1.2.4
 MarkupSafe==2.1.1
 mccabe==0.7.0
-psycopg2==2.9.5
+mysqlclient==2.1.1
 pycodestyle==2.10.0
 pyflakes==3.0.1
+PyMySQL==1.0.2
 python-dotenv==0.21.0
 SQLAlchemy==1.4.45
 tomli==2.0.1
