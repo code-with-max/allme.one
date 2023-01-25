@@ -8,15 +8,15 @@
   {% set info = links_data['information']['about'] %}
   <div class="card text-center">
     <div class="card-header">
-      {{ info['about'] }}
+      {{ info['about'] }} Personal card
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ info['username'] }}</h5>
       <p class="card-text">{{ info['description'] }}</p>
     </div>
   </div>
+</br>
 {% endif %}
-<br>
 <!-- Messengers -->
 {% if links_data['messengers'] %}
 <div class="card text-center">
@@ -34,6 +34,26 @@
     </div>
   </div>
 </div>
+</br>
+{% endif %}
+<!-- Development -->
+{% if links_data['development'] %}
+<div class="card text-center">
+  <div class="card-header">
+    Development
+  </div>
+  <div class="card-body">
+    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+      {% for key, data in links_data['development'].items() %}
+      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+        <i class="ti {{ data['icon'] }}"></i>
+        {{ key }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</br>
 {% endif %}
 <!-- Social media -->
 {% if links_data['social_media'] %}
@@ -52,8 +72,46 @@
     </div>
   </div>
 </div>
-{% endif %}
 </br>
+{% endif %}
+<!-- Donations world -->
+{% if links_data['donate_world'] %}
+<div class="card text-center">
+  <div class="card-header">
+    Donations pages
+  </div>
+  <div class="card-body">
+    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+      {% for key, data in links_data['donate_world'].items() %}
+      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+        <i class="ti {{ data['icon'] }}"></i>
+        {{ key }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</br>
+{% endif %}
+<!-- Donations Russia -->
+{% if links_data['donate_russia'] %}
+<div class="card text-center">
+  <div class="card-header">
+    Donation from Russia
+  </div>
+  <div class="card-body">
+    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+      {% for key, data in links_data['donate_russia'].items() %}
+      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+        <i class="ti {{ data['icon'] }}"></i>
+        {{ key }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</br>
+{% endif %}
 <!-- E-mails -->
 {% if links_data['emails'] %}
   {% set data = links_data['emails']['email'] %}
@@ -64,14 +122,16 @@
     <div class="card-body">
       <h5 class="card-title">{{ data['username'] }}</h5>
       <p class="card-text">{{ data['description'] }}</p>
-      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
-        <i class="ti {{ data['icon'] }}"></i>
-        Send E-mail
-      </a>
+      <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+        <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+          <i class="ti {{ data['icon'] }}"></i>
+          send E-mail
+        </a>
+      </div>
     </div>
   </div>
+</br>
 {% endif %}
-<br>
 <!-- Bottom buttons -->
 {% include '/links/cards/bottom_buttons.html' %}
 <!-- Bottom links -->
