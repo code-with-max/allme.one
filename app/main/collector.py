@@ -17,6 +17,7 @@ def collect_links_data(list):
     user_links, free_links = user_list.get_links()
     for link in user_links:
         full_url = networks_data[link.network_name]['url'] + link.username
+        icon = networks_data[link.network_name]['icon_name']
         group = networks_data[link.network_name]['group']
         key = str(link.network_name)
         link_data = {
@@ -25,6 +26,7 @@ def collect_links_data(list):
                 'title': link.get_title(),
                 'about': link.about,
                 'description': link.description,
+                'icon': icon
                 }
         link_key = {
             key: link_data

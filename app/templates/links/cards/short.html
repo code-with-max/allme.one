@@ -27,7 +27,7 @@
     <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
       {% for key, data in links_data['messengers'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
-        <i class="ti ti-brand-{{ key }}"></i>
+        <i class="ti {{ data['icon'] }}"></i>
         {{ key }}
       </a>
       {% endfor %}
@@ -45,7 +45,7 @@
     <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
       {% for key, data in links_data['social_media'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
-        <i class="ti ti-brand-{{ key }}"></i>
+        <i class="ti {{ data['icon'] }}"></i>
         {{ key }}
       </a>
       {% endfor %}
@@ -56,16 +56,16 @@
 </br>
 <!-- E-mails -->
 {% if links_data['emails'] %}
-  {% set info = links_data['emails']['email'] %}
+  {% set data = links_data['emails']['email'] %}
   <div class="card text-center">
     <div class="card-header">
-      {{ info['about'] }}
+      {{ data['about'] }}
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ info['username'] }}</h5>
-      <p class="card-text">{{ info['description'] }}</p>
-      <a href="{{ info['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
-        <i class="ti ti-at"></i>
+      <h5 class="card-title">{{ data['username'] }}</h5>
+      <p class="card-text">{{ data['description'] }}</p>
+      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+        <i class="ti {{ data['icon'] }}"></i>
         Send E-mail
       </a>
     </div>
