@@ -2,7 +2,6 @@ Locally using SQlite
 
 run:
 flask shell
-
 from app.extensions import db
 from app.models.links import *
 db.create_all()
