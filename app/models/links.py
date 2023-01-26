@@ -110,7 +110,7 @@ class SocialNetwork():
     description = db.Column(db.String(255))
 
     def get_title(self):
-        # Need capitalise first letter
+        # FIXME Need capitalise first letter
         if self.network_name == 'github':
             return 'GitHub'
         elif self.network_name == 'playmarket':

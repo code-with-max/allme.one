@@ -44,7 +44,7 @@ def login():
             flash("Email does not exist", category='warning')
 
     return render_template('auth/login.html',
-                           user=current_user,
+                        #    user=current_user,
                            centered_view=True,
                            )
 
@@ -95,6 +95,36 @@ def signup():
 
     return render_template(
                     'auth/signup.html',
-                    user=current_user,
+                    # user=current_user,
+                    centered_view=True,
+                    )
+
+
+@bp.route('/newpass/', methods=['GET', 'POST'])
+@login_required
+def newpass():
+    if request.method == 'POST':
+        password0 = request.form.get('password0')  # Old password
+        password1 = request.form.get('password1')  # New password
+        password2 = request.form.get('password2')  # Retyped new password
+
+        if not check_password_hash(current_user.password, password0):
+            flash("Current password incorrect", category='warning')
+        elif password1 != password2:
+            flash("New passwords mismatch", category='warning')
+        elif len(password1) < 6:
+            flash("The new password is too short", category='warning')
+        elif check_password_hash(current_user.password, password1):
+            flash("The new password matches the old", category='warning')
+        else:
+            current_user.password = hash_password(password1)
+            db.session.add(current_user)
+            db.session.commit()
+            flash("Password changed", category='success')
+            return redirect(url_for('main.settings'))
+
+    return render_template(
+                    'auth/newpass.html',
+                    # user=current_user,  # TODO parametr not used
                     centered_view=True,
                     )

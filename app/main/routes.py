@@ -50,6 +50,13 @@ def home():
                            )
 
 
+@bp.route('/settings/')
+def settings():
+    if current_user.is_authenticated:
+        return render_template("settings.html", centered_view=True)
+    return redirect(url_for('main.index'))
+
+
 @bp.route('/')
 def index():
     if current_user.is_authenticated:
