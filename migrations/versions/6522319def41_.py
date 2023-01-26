@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ebbe8dee5282
+Revision ID: 6522319def41
 Revises: 
-Create Date: 2023-01-25 12:59:41.921850
+Create Date: 2023-01-26 13:16:27.516179
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ebbe8dee5282'
+revision = '6522319def41'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -122,6 +122,16 @@ def upgrade():
     sa.ForeignKeyConstraint(['links_id'], ['links.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('playmarket',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('username', sa.String(length=160), nullable=True),
+    sa.Column('about', sa.String(length=32), nullable=True),
+    sa.Column('network_name', sa.String(length=16), nullable=True),
+    sa.Column('description', sa.String(length=255), nullable=True),
+    sa.Column('links_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['links_id'], ['links.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('telegram',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=160), nullable=True),
@@ -171,6 +181,7 @@ def downgrade():
     op.drop_table('vkontakte')
     op.drop_table('twitter')
     op.drop_table('telegram')
+    op.drop_table('playmarket')
     op.drop_table('instagram')
     op.drop_table('github')
     op.drop_table('facebook')
