@@ -4,6 +4,7 @@ from config import Config
 from app.extensions import db
 from app.extensions import login_manager
 from app.extensions import migrate
+from app.extensions import mail
 from app.extensions import env
 
 
@@ -24,7 +25,9 @@ def create_app(config_class=Config):
 
     # Auto-escape
 
-    #
+    #  Flask-mail
+    mail.init_app(app)
+
     # Register blueprints here
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)

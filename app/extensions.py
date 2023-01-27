@@ -10,6 +10,10 @@ from flask_migrate import Migrate
 migrate = Migrate()
 
 
+from flask_mail import Mail
+mail = Mail()
+
+
 from jinja2 import Environment, select_autoescape
 env = Environment(
         autoescape=select_autoescape(

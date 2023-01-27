@@ -7,6 +7,7 @@ from flask import flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.auth import bp
+from app.auth.helpers import send_verification_email
 from app.extensions import db
 from app.models.user import User
 from app.models.links import Links, Email
@@ -91,6 +92,7 @@ def signup():
             db.session.commit()
             login_user(new_user, remember=True)
             flash("User created", category='success')
+            send_verification_email(request_email)
             return redirect(url_for('main.home'))
 
     return render_template(
@@ -128,3 +130,14 @@ def newpass():
                     # user=current_user,  # TODO parametr not used
                     centered_view=True,
                     )
+
+
+@bp.route('/test_mail/')
+@login_required
+def test_mail():
+    '''
+    Test e-mail send
+    Do not use in PROD
+    '''
+    answer = send_verification_email(current_user.email)
+    return f'<h3> {answer} </h3>'
