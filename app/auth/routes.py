@@ -7,8 +7,7 @@ from flask import flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.auth import bp
-from app.auth.helpers import send_verification_email
-from app.auth.helpers import validate_token
+from app.auth.helpers import send_verification_email, validate_token
 from app.extensions import db
 from app.models.user import User
 from app.models.links import Links, Email
@@ -147,6 +146,20 @@ def send_mail():
 def confirm_email(token):
     email = validate_token(token)
     if email:
-        return redirect(url_for("main.index"))
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if user.email_confirmed:
+                flash("Email already confirmed", category='success')
+            else:
+                user.email_confirmed = True
+                db.session.add(user)
+                db.session.commit()
+                flash(f"Email {email} confirmed", category='success')
+        else:
+            flash("Email for confirmation will not find", category='success') 
+        if current_user.is_authenticated:
+            return redirect(url_for("main.home"))
+        else:
+            return redirect(url_for("main.index"))
     else:
         return redirect(url_for("main.index"))

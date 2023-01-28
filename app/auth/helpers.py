@@ -36,6 +36,10 @@ def send_verification_email(email_adress):
 
 
 def validate_token(token):
+    '''
+    One hour TTL confirmationlinks
+    TODO Need use env var for config it
+    '''
     try:
         email = s.loads(token, salt='confirm', max_age=3600)
     except SignatureExpired:
