@@ -23,7 +23,7 @@
       <!-- Flash messages -->
       <!-- https://flask.palletsprojects.com/en/2.2.x/patterns/flashing/ -->
       <!-- https://getbootstrap.com/docs/5.0/components/alerts/ -->
-      <div class="container">
+      <div class="container text-center">
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
@@ -38,7 +38,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             {% else %}
-              <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+              <div class="alert alert-info alert-dismissible fade show" role="alert">
                 {{ message }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>

@@ -13,6 +13,6 @@ gunicorn -w 4 wsgi:app
 
 If you're using the application factory pattern, Gunicorn allows specifying a function call like my_project:create_app(). For most cases, you can the skip making a wsgi.py file and tell Gunicorn how to create your app directly.
 
-gunicorn -w 4 "my_project:create_app()"
+gunicorn -w 4 "app:create_app()"
 
 Note that the quotes are necessary in some shells where parentheses have special meaning.

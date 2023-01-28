@@ -7,6 +7,7 @@ from flask import flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.auth import bp
+from app.auth.helpers import send_verification_email, validate_token
 from app.extensions import db
 from app.models.user import User
 from app.models.links import Links, Email
@@ -91,6 +92,7 @@ def signup():
             db.session.commit()
             login_user(new_user, remember=True)
             flash("User created", category='success')
+            send_verification_email(request_email)
             return redirect(url_for('main.home'))
 
     return render_template(
@@ -128,3 +130,36 @@ def newpass():
                     # user=current_user,  # TODO parametr not used
                     centered_view=True,
                     )
+
+
+@bp.route('/send_email/')
+@login_required
+def send_mail():
+    result = send_verification_email(current_user.email)
+    if result:
+        return redirect(url_for("main.index"))
+    else:
+        return redirect(url_for("main.index"))
+
+
+@bp.route('/confirm/<token>')
+def confirm_email(token):
+    email = validate_token(token)
+    if email:
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if user.email_confirmed:
+                flash("Email already confirmed", category='success')
+            else:
+                user.email_confirmed = True
+                db.session.add(user)
+                db.session.commit()
+                flash(f"Email {email} confirmed", category='success')
+        else:
+            flash("Email for confirmation will not find", category='success') 
+        if current_user.is_authenticated:
+            return redirect(url_for("main.home"))
+        else:
+            return redirect(url_for("main.index"))
+    else:
+        return redirect(url_for("main.index"))

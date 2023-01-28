@@ -3,6 +3,23 @@
 {% block title %}My page{% endblock %}
 
 {% block content %}
+{% if not user.email_confirmed %}
+  <div class="container">
+    <div class="card border-warning text-center">
+      <div class="card-header">
+        Warning
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Email is not confirmed</h5>
+        <p class="card-text">Please use the link from the email</p>
+        <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+          <a href="{{ url_for('auth.send_mail') }}" class="btn btn-outline-primary">Resend email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+{% endif %}
 <!-- SHARE LINKS -->
 <div class="container">
   {% include 'links/home/unique_link.html' %}
