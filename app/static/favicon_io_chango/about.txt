@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Chango
+- Font Author: Copyright (c) 2011 Fontstage (info@fontstage.com), with Reserved Font Name "Chango"
+- Font Source: http://fonts.gstatic.com/s/chango/v21/2V0cKI0OB5U7WaJyz324TFUaAw.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
