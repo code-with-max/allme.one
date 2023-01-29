@@ -11,7 +11,7 @@
             {% if networks[link]['is_free'] or user.is_paying() %}
             {% set redirect_url = 'main.' + link %}
             <a href="{{ url_for(redirect_url, action='edit') }}" class="btn btn-outline-primary">
-                <i class="ti ti-brand-{{link}}"></i>
+                <i class="ti {{ networks[link]['icon_name'] }}"></i>
                 {{ link }}
             </a>
             {% endif %}
