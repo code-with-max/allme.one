@@ -23,6 +23,7 @@ class Links(db.Model):
     telegram = (db.relationship('Telegram', backref='links'))
     github = (db.relationship('Github', backref='links'))
     playmarket = (db.relationship('Playmarket', backref='links'))
+    linkedin = (db.relationship('Linkedin', backref='links'))
 
     def __repr__(self) -> str:
         return f'Unique link: {self.unique_link}'
@@ -70,13 +71,16 @@ class Links(db.Model):
         elif req == 'playmarket' and self.playmarket:
             return self.playmarket[0]
 
+        elif req == 'linkedin' and self.linkedin:
+            return self.linkedin[0]
+
         else:
             return None
 
     def get_links(self) -> list:
         '''
-        1st return [list] of first social links if it exist \n
-        2nd rerurn [list] of free social links (if link not exist) \n
+        1st return [list] of object first social links if it exist \n
+        2nd rerurn [list] of string free social links (if link not exist) \n
         The method does not use the user's payment status \n
         current_user.is_paying() - for check it
         '''
@@ -95,6 +99,7 @@ class Links(db.Model):
         used.append(self.cloudtips[0]) if self.cloudtips else free.append('cloudtips')
         used.append(self.email[0]) if self.email else free.append('email')
         used.append(self.telegram[0]) if self.telegram else free.append('telegram')
+        used.append(self.linkedin[0]) if self.linkedin else free.append('linkedin')
         return [used, free]
 
 
@@ -245,3 +250,13 @@ class Playmarket(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<playmarket username: {self.username}>'
+
+
+class Linkedin(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='linkedin', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<linkedin username: {self.username}>'
