@@ -90,4 +90,11 @@ networks_data = {
                       'repr_name': 'Google Play',
                       },
 
+       'linkedin': {'url': 'https://www.linkedin.com/in/',
+                    'is_free': True,
+                    'group': 'social_media',
+                    'icon_name': 'ti-brand-linkedin',
+                    'repr_name': 'LinkedIn',
+                    }
+
               }

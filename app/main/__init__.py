@@ -17,3 +17,4 @@ from app.main.links import telegram
 from app.main.links import github
 from app.main.links import playmarket
 from app.main.links import vk
+from app.main.links import linkedin
