@@ -1,7 +1,7 @@
 <div class="card text-center">
     <div class="card-header">
-      <i class="ti ti-brand-{{ link.network_name }}"></i>
-      {{ link.get_title() }}
+      <i class="ti {{ networks[link.get_title()]['icon_name'] }}"></i>
+      {{ networks[link.get_title()]['repr_name'] }}
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ link.username }}</h5>
