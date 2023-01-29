@@ -3,78 +3,91 @@ networks_data = {
                  'is_free': True,
                  'group': 'information',
                  'icon_name': 'ti-user',
+                 'repr_name': 'About',
                  },
 
        'email': {'url': 'mailto:',
                  'is_free': True,
                  'group': 'emails',
-                 'icon_name': 'ti-at'
+                 'icon_name': 'ti-at',
+                 'repr_name': 'Email',
                  },
 
        'facebook': {'url': 'https://facebook.com/',
                     'is_free': True,
                     'group': 'social_media',
                     'icon_name': 'ti-brand-facebook',
+                    'repr_name': 'Facebook',
                     },
 
        'twitter': {'url': 'https://twitter.com/',
                    'is_free': True,
                    'group': 'social_media',
                    'icon_name': 'ti-brand-twitter',
+                   'repr_name': 'Twitter',
                    },
 
        'vk': {'url': 'https://vk.com/',
               'is_free': False,
               'group': 'social_media',
               'icon_name': 'ti-brand-vk',
+              'repr_name': 'VKontakte',
               },
 
        'instagram': {'url': 'https://instagram.com/',
                      'is_free': True,
                      'group': 'social_media',
                      'icon_name': 'ti-brand-instagram',
+                     'repr_name': 'Instagram',
                      },
 
        'youtube': {'url': 'https://youtube.com/@',
                    'is_free': True,
                    'group': 'social_media',
                    'icon_name': 'ti-brand-youtube',
+                   'repr_name': 'YouTube',
                    },
 
        'buymeacoffe': {'url': 'https://www.buymeacoffee.com/',
                        'is_free': True,
                        'group': 'donate_world',
-                       'icon_name': 'ti-currency-dollar'
+                       'icon_name': 'ti-currency-dollar',
+                       'repr_name': 'Buy me a coffee',
                        },
 
        'cloudtips': {'url': 'https://pay.cloudtips.ru/p/',
                      'is_free': True,
                      'group': 'donate_russia',
-                     'icon_name': 'ti-currency-rubel'
+                     'icon_name': 'ti-currency-rubel',
+                     'repr_name': 'CloudTips',
                      },
 
        'boosty': {'url': 'https://boosty.to/',
                   'is_free': False,
                   'group': 'donate_russia',
-                  'icon_name': 'ti-currency-rubel'
+                  'icon_name': 'ti-currency-rubel',
+                  'repr_name': 'Boosty',
                   },
 
        'telegram': {'url': 'https://t.me/',
                     'is_free': True,
                     'group': 'messengers',
-                    'icon_name': 'ti-brand-telegram'
+                    'icon_name': 'ti-brand-telegram',
+                    'repr_name': 'Telegram',
                     },
 
        'github': {'url': 'https://github.com/',
                   'is_free': True,
                   'group': 'development',
-                  'icon_name': 'ti-brand-github'
+                  'icon_name': 'ti-brand-github',
+                  'repr_name': 'GitHub',
                   },
 
        'playmarket': {'url': 'https://play.google.com/store/apps/developer?id=',
                       'is_free': True,
                       'group': 'development',
-                      'icon_name': 'ti-brand-google-play'
+                      'icon_name': 'ti-brand-google-play',
+                      'repr_name': 'Google Play',
                       },
 
               }

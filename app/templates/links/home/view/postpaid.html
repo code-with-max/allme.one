@@ -9,7 +9,8 @@
         {% for link in free_links %}
             {% if not networks[link]['is_free'] %}
                 <button type="button" class="btn btn-outline-primary" disabled>
-                    <i class="ti {{ networks[link]['icon_name'] }}"></i>  {{ link }}
+                    <i class="ti {{ networks[link]['icon_name'] }}"></i>  
+                    {{ networks[link]['repr_name'] }}
                 </button>
             {% endif %}
         {% endfor %}

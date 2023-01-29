@@ -110,22 +110,14 @@ class SocialNetwork():
     description = db.Column(db.String(255))
 
     def get_title(self):
-        # FIXME Need capitalise first letter
-        if self.network_name == 'github':
-            return 'GitHub'
-        elif self.network_name == 'playmarket':
-            return 'Google Play'
-        elif self.network_name == 'twitter':
-            return 'Twitter'
-        else:
-            return self.network_name
+        return self.network_name
 
 
 class About(db.Model, SocialNetwork):
     links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(network_name='about', **kwargs)
+        super().__init__(**kwargs)
 
     def __repr__(self) -> str:
         return f'<(about) User name: {self.username}>'
@@ -135,7 +127,7 @@ class Email(db.Model, SocialNetwork):
     links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(network_name='email', **kwargs)
+        super().__init__(**kwargs)
 
     def __repr__(self) -> str:
         return f'<E-mail adress: {self.username}>'
