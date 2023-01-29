@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 from app.main import bp
 from app.extensions import db
 from app.models.links import Twitter
-# from app.models.networks import networks_data
+from app.models.networks import networks_data
 
 
 @bp.route('/twitter/<action>/', methods=('GET', 'POST'))
@@ -45,4 +45,5 @@ def twitter(action):
         social_media=twitter,
         user=current_user,
         centered_view=True,
+        network_data=networks_data['twitter']
         )

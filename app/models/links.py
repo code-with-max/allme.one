@@ -115,6 +115,8 @@ class SocialNetwork():
             return 'GitHub'
         elif self.network_name == 'playmarket':
             return 'Google Play'
+        elif self.network_name == 'twitter':
+            return 'Twitter'
         else:
             return self.network_name
 
