@@ -17,10 +17,12 @@
       <label for="InputPassword1" class="form-label">Password</label>
       <input name="password" type="password" class="form-control" id="InputPassword1">
     </div>
-    <div class="d-grid gap-4 col-4 mx-auto">
+    <div class="d-grid gap-4 col-{{ button_size }} mx-auto">
       <button type="submit" class="btn btn-primary">Login</button>
       <a href="{{ url_for('auth.signup') }}" class="btn btn-outline-primary">Sign up</a>
+      <a href="{{ url_for('auth.ask_password_reset') }}" class="btn btn-outline-primary">I forgot my password</a>
     </div>
   </form>
 </div>
+{% include 'bottom_about.html' %}
 {% endblock %}

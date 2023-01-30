@@ -29,6 +29,8 @@ def get_random_link(length):
 
 @bp.route('/login/', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("main.home"))
     if request.method == 'POST':
         email = request.form.get("email")
         password = request.form.get("password")
@@ -45,7 +47,7 @@ def login():
             flash("Email does not exist", category='warning')
 
     return render_template('auth/login.html',
-                        #    user=current_user,
+                           # user=current_user,
                            centered_view=True,
                            )
 
@@ -66,6 +68,8 @@ def logout():
 
 @bp.route('/signup/', methods=['GET', 'POST'])
 def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for("main.home"))
     if request.method == 'POST':
         request_email = request.form.get("email")
         password1 = request.form.get("password1")
@@ -74,7 +78,7 @@ def signup():
         email_exist = User.query.filter_by(email=request_email).first()
         if email_exist:
             flash("E-mail already used", category='warning')
-        elif len(password1) < 6:
+        elif len(password1) < 6:  # TODO Need separate function
             flash("Password is to short", category='warning')
         elif password1 != password2:
             flash("Passwords dont match", category='warning')
@@ -92,7 +96,7 @@ def signup():
             db.session.commit()
             login_user(new_user, remember=True)
             flash("User created", category='success')
-            send_verification_email(request_email)
+            send_verification_email(request_email, 'confirm')
             return redirect(url_for('main.home'))
 
     return render_template(
@@ -102,9 +106,13 @@ def signup():
                     )
 
 
-@bp.route('/newpass/', methods=['GET', 'POST'])
+@bp.route('/changepass/', methods=['GET', 'POST'])
 @login_required
-def newpass():
+def change_password():
+    '''
+    Updating the password by the user \n
+    (Settings -> Change password)
+    '''
     if request.method == 'POST':
         password0 = request.form.get('password0')  # Old password
         password1 = request.form.get('password1')  # New password
@@ -112,7 +120,7 @@ def newpass():
 
         if not check_password_hash(current_user.password, password0):
             flash("Current password incorrect", category='warning')
-        elif password1 != password2:
+        elif password1 != password2:  # TODO Need separate function
             flash("New passwords mismatch", category='warning')
         elif len(password1) < 6:
             flash("The new password is too short", category='warning')
@@ -126,7 +134,7 @@ def newpass():
             return redirect(url_for('main.settings'))
 
     return render_template(
-                    'auth/newpass.html',
+                    'auth/changepass.html',
                     # user=current_user,  # TODO parametr not used
                     centered_view=True,
                     )
@@ -135,6 +143,9 @@ def newpass():
 @bp.route('/send_email/')
 @login_required
 def send_mail():
+    '''
+    Resend email confirmation link
+    '''
     result = send_verification_email(current_user.email)
     if result:
         return redirect(url_for("main.index"))
@@ -144,6 +155,9 @@ def send_mail():
 
 @bp.route('/confirm/<token>')
 def confirm_email(token):
+    '''
+    Endpoint for email confirmation link
+    '''
     email = validate_token(token)
     if email:
         user = User.query.filter_by(email=email).first()
@@ -156,10 +170,78 @@ def confirm_email(token):
                 db.session.commit()
                 flash(f"Email {email} confirmed", category='success')
         else:
-            flash("Email for confirmation will not find", category='success') 
+            flash("Email for confirmation will not find", category='warning')
         if current_user.is_authenticated:
             return redirect(url_for("main.home"))
         else:
             return redirect(url_for("main.index"))
     else:
         return redirect(url_for("main.index"))
+
+
+@bp.route('/ask_password_reset/', methods=['GET', 'POST'])
+def ask_password_reset():
+    '''
+    Requesting reset a forgotten password
+    '''
+    if current_user.is_authenticated:
+        flash("You must use: Settings -> Change password", category='warning')
+        return redirect(url_for("main.home"))
+    if request.method == 'POST':
+        request_email = request.form.get("email")
+
+        email_exist = User.query.filter_by(email=request_email).first()
+        if email_exist:
+            send_verification_email(email_exist.email, 'reset')
+            return redirect(url_for("main.index"))
+
+    return render_template(
+                    'auth/resetpass.html',
+                    centered_view=True,
+                    )
+
+
+@bp.route('/password_reset/<token>', methods=['GET', 'POST'])
+def do_password_reset(token):
+    '''
+    Endpoint for password reset link.
+    '''
+    if current_user.is_authenticated:
+        flash("You must use: Settings -> Change password", category='warning')
+        return redirect(url_for("main.home"))
+
+    email = validate_token(token)
+    if not email:
+        flash("Ask new letter", category='warning')
+        return redirect(url_for("main.index"))
+    else:
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            flash("User not found", category='warning')
+            return redirect(url_for("main.index"))
+        else:
+            if not user.email_confirmed:
+                flash("User e-mail not confirmed", category='warning')
+                return redirect(url_for("main.index"))
+
+    if request.method == 'POST':
+        print("POST")
+        password1 = request.form.get('password1')  # New
+        password2 = request.form.get('password2')  # Retype
+        if password1 != password2:  # TODO Need separate function
+            flash("New passwords mismatch", category='warning')
+        elif len(password1) < 6:
+            flash("New password is too short", category='warning')
+        elif check_password_hash(user.password, password1):
+            flash("New password matches old", category='warning')
+        else:
+            user.password = hash_password(password1)
+            db.session.add(user)
+            db.session.commit()
+            flash("Password changed", category='success')
+            return redirect(url_for('main.index'))
+
+    return render_template('auth/newpass.html',
+                           user=user,
+                           centered_view=True,
+                           )

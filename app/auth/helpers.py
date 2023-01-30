@@ -7,47 +7,60 @@ from app.auth import s  # FIXME I think need another variable name
 from config import Config
 
 
-def send_verification_email(email_adress):
+def send_verification_email(email_adress: str, action: str) -> bool:
     '''
-    Sending email with verification link :)
+    Sending email with email confirmation or password reset links :)\n
+    Use:\n
+    send_verification_email('<email>', 'confirm') for confirmation \n
+    send_verification_email('<email>', 'reset') for password reset\n
     '''
-    token = s.dumps(email_adress, salt='confirm')  # FIXME Must use env var
-    url = url_for('auth.confirm_email', token=token, _external=True)
-    # print("***")
-    # print(link)
-    # print("***")
-    msg = Message("Email confirmation",
-                  sender="support@allme.one",
+    if action == 'confirm':
+        url_endpoint = 'auth.confirm_email'
+        msg_subject = 'Email address confirmation'
+        msg_body_template = 'mail/email_confirmation.html'
+    elif action == 'reset':
+        url_endpoint = 'auth.do_password_reset'
+        msg_subject = 'Forgotten password reset'
+        msg_body_template = 'mail/password_reset.html'
+
+    salt = '3AB31D4935676'  # FIXME Must use env var
+    token = s.dumps(email_adress, salt=salt)
+    url = url_for(url_endpoint, token=token, _external=True)
+
+    msg = Message(msg_subject,
+                  sender="support@allme.one",  # FIXME Must use env var
                   recipients=[email_adress])
-    msg.html = render_template('mail/email_confirmation.html', confirm_url=url)
+    msg.html = render_template(msg_body_template, confirm_url=url)
     try:
         mail.send(msg)
     except SMTPServerDisconnected:
-        flash("It is not possible to send a confirmation email", category='warning')
+        flash("It is not possible to send email", category='warning')
         return False
     except Exception as e:
-        # TODO Errors need to be handled https://docs.python.org/3/library/smtplib.html
-        flash("It is not possible to send a confirmation email", category='warning')
+        # TODO smtp server errors need to be handled
+        # https://docs.python.org/3/library/smtplib.html
+        flash("It is not possible to send email", category='warning')
         flash(str(e))
         return False
     else:
-        flash("Confirmation email was send", category='success')
+        flash("Email was send", category='success')
         return True
 
 
-def validate_token(token):
+def validate_token(token: str) -> bool | str:
     '''
-    One hour TTL confirmationlinks
-    TODO Need use env var for config it
+    Validate TTL confirmation links\n
+    Return False if link not valid or confirmed e-mail (as str)
     '''
+    salt = '3AB31D4935676'  # FIXME Must use env var
     try:
-        email = s.loads(token, salt='confirm', max_age=3600)
+        email = s.loads(token, salt=salt, max_age=3600)
     except SignatureExpired:
-        flash("Confirmation link expired", category='warning')
+        flash("Link expired", category='warning')
         return False
     except BadTimeSignature:
-        flash("Confirmation link invalid", category='warning')
+        flash("Link invalid", category='warning')
         return False
     else:
-        flash("Confirmation link approved", category='success')
+        # flash("Link approved", category='success')
         return email
