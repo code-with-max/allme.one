@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}My page{% endblock %}
+{% block title %}my page{% endblock %}
 
 {% block content %}
 {% if not user.email_confirmed %}
@@ -26,6 +26,10 @@
 </div>
 <br>
 <!-- User added links -->
+<div class="container text-center">
+  <h4 align="center">Added links</h4>
+  <hr class="border border-primary border-2 opacity-50">
+</div>
 {# ''' #}
 {# using list of strings #}
 {# may be later I must using switch-case method #}
@@ -50,7 +54,10 @@
 <br>
 <!-- Avaible for user links (using list)-->
 <div class="container text-center">
-    <!-- <h4>Upgrade you card:</h4> -->
+  <div class="container text-center">
+    <h4 align="center">Available links</h4>
+    <hr class="border border-primary border-2 opacity-50">
+  </div>
   {# ''' #}
   {# Included here free and paid avaible links tempale #}
   {# I think need else more list of paid links... #}
@@ -63,6 +70,10 @@
   {% endif %}
 </div>
 <br>
+<div class="container text-center">
+  <h4 align="center">Service menu</h4>
+  <hr class="border border-secondary border-2 opacity-50">
+</div>
 <div class="container">
   <div class="card">
     <div class="card-body">
@@ -74,4 +85,5 @@
     </div>
   </div>
 </div>
+{% include 'bottom_about.html' %}
 {% endblock %}

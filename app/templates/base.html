@@ -24,43 +24,48 @@
       <!-- Flash messages -->
       <!-- https://flask.palletsprojects.com/en/2.2.x/patterns/flashing/ -->
       <!-- https://getbootstrap.com/docs/5.0/components/alerts/ -->
-      <div class="container text-center">
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-          {% for category, message in messages %}
-            {% if category == "warning" %}
-              <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <div class="container-sm text-center">
+            {% for category, message in messages %}
+              {% if category == "warning" %}
+              <div class="container">
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
               </div>
-            {% elif category == "success" %}
-              <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              {% elif category == "success" %}
+              <div class="container">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
               </div>
-            {% else %}
-              <div class="alert alert-info alert-dismissible fade show" role="alert">
-                {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              {% else %}
+              <div class="container">
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                  {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
               </div>
-            {% endif %}
-          {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </div>
         {% endif %}
       {% endwith %}
-      </div>
       <!-- End Flash messages -->
 
       <!-- Main content block -->
       {% if centered_view %}
-        <div class="container position-absolute top-50 start-50 translate-middle">
+        <div class="container-sm position-absolute top-50 start-50 translate-middle">
       {% else %}
-        <div class="container">
+        <div class="container-sm">
       {% endif %}
         {% block content %}
         {% endblock %}
         </div>
       <!-- End Main content block -->
-
       <!-- Footer links-->
     </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> 
