@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
     def __repr__(self) -> str:
         return f'<e-mail: "{self.email}", user_links: {self.links}>'
 
-    def is_paying(self) -> bool:
+    def is_paying(self: object) -> bool:
         ''' Return boolean user payment status'''
         if self.payment_state != 'white':
             return True

@@ -15,7 +15,7 @@ from app.main.collector import collect_links_data
 # Get func from main blueprint :(
 # OperationalError
 def short_list_of_links():
-
+    # POST method
     if request.method == 'POST':
         content_type = request.headers.get('Content-Type')
         if (content_type == 'application/json'):
@@ -27,10 +27,11 @@ def short_list_of_links():
             user_list = Links.query.filter_by(unique_link=unique_link).first()
             if not user_list:
                 return jsonify({'error': 'user card not found'})
-            links_data, owner_is_paying = collect_links_data(user_list)
+            links_data = collect_links_data(user_list)
             return jsonify(links_data)
         else:
             return jsonify({'error': 'Content-Type not supported!'})
+    # GET method
     elif request.method == 'GET':
         args = request.args
         unique_link = args.get('card')
@@ -39,6 +40,6 @@ def short_list_of_links():
         user_list = Links.query.filter_by(unique_link=unique_link).first()
         if not user_list:
             return jsonify({'error': 'user card not found'})
-        links_data, owner_is_paying = collect_links_data(user_list)
+        links_data = collect_links_data(user_list)
         return jsonify(links_data)
     # user_list = Links.query.filter_by(unique_link=unique_link).first()

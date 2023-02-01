@@ -4,16 +4,15 @@
 from app.models.networks import networks_data
 
 
-def collect_links_data(list):
+def collect_links_data(user_list: object) -> dict:
     '''
-    Return tuple of [user links data, payment status],
+    Return user links data as dictionary,
     require SQLAlchemy list object as positional argument \n
     Usage example: \n
-    list_data, payment_status = collect_links_data(list_object)
+    user_list = collect_links_data(list_object)
     '''
-    user_list = list
     response = {}
-    user_is_paying = user_list.user.is_paying()
+    user_is_paying = user_list.user.is_paying()  # TODO Need pay chech
     user_links, free_links = user_list.get_links()
     for link in user_links:
         full_url = networks_data[link.network_name]['url'] + link.username
@@ -36,4 +35,17 @@ def collect_links_data(list):
             response[group] = link_key
         else:
             response[group].update(link_key)
-    return response, user_is_paying
+    return response
+
+
+def collect_share_data(user_url: str) -> dict:
+    response = {}
+    for key, data in networks_data.items():
+        if data['share_url']:
+            share_data = {
+                'share_url': f"{data['share_url']}{user_url}",
+                'icon': data['icon_name'],
+                'repr_name': data['repr_name'],
+                }
+            response[key] = share_data
+    return response

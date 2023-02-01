@@ -4,6 +4,7 @@ networks_data = {
                  'group': 'information',
                  'icon_name': 'ti-user',
                  'repr_name': 'About',
+                 'share_url': False
                  },
 
        'email': {'url': 'mailto:',
@@ -11,6 +12,7 @@ networks_data = {
                  'group': 'emails',
                  'icon_name': 'ti-at',
                  'repr_name': 'Email',
+                 'share_url': False
                  },
 
        'facebook': {'url': 'https://facebook.com/',
@@ -18,6 +20,7 @@ networks_data = {
                     'group': 'social_media',
                     'icon_name': 'ti-brand-facebook',
                     'repr_name': 'Facebook',
+                    'share_url': 'https://www.facebook.com/sharer.php?u='
                     },
 
        'twitter': {'url': 'https://twitter.com/',
@@ -25,6 +28,7 @@ networks_data = {
                    'group': 'social_media',
                    'icon_name': 'ti-brand-twitter',
                    'repr_name': 'Twitter',
+                   'share_url': 'https://twitter.com/intent/tweet?text=allme&hashtags=allme,&url='
                    },
 
        'vk': {'url': 'https://vk.com/',
@@ -32,6 +36,7 @@ networks_data = {
               'group': 'social_media',
               'icon_name': 'ti-brand-vk',
               'repr_name': 'VKontakte',
+              'share_url': False
               },
 
        'instagram': {'url': 'https://instagram.com/',
@@ -39,6 +44,7 @@ networks_data = {
                      'group': 'social_media',
                      'icon_name': 'ti-brand-instagram',
                      'repr_name': 'Instagram',
+                     'share_url': False
                      },
 
        'youtube': {'url': 'https://youtube.com/@',
@@ -46,6 +52,7 @@ networks_data = {
                    'group': 'social_media',
                    'icon_name': 'ti-brand-youtube',
                    'repr_name': 'YouTube',
+                   'share_url': False
                    },
 
        'buymeacoffe': {'url': 'https://www.buymeacoffee.com/',
@@ -53,6 +60,7 @@ networks_data = {
                        'group': 'donate_world',
                        'icon_name': 'ti-currency-dollar',
                        'repr_name': 'Buy me a coffee',
+                       'share_url': False
                        },
 
        'cloudtips': {'url': 'https://pay.cloudtips.ru/p/',
@@ -60,6 +68,7 @@ networks_data = {
                      'group': 'donate_russia',
                      'icon_name': 'ti-currency-rubel',
                      'repr_name': 'CloudTips',
+                     'share_url': False
                      },
 
        'boosty': {'url': 'https://boosty.to/',
@@ -67,6 +76,7 @@ networks_data = {
                   'group': 'donate_russia',
                   'icon_name': 'ti-currency-rubel',
                   'repr_name': 'Boosty',
+                  'share_url': False
                   },
 
        'telegram': {'url': 'https://t.me/',
@@ -74,6 +84,7 @@ networks_data = {
                     'group': 'messengers',
                     'icon_name': 'ti-brand-telegram',
                     'repr_name': 'Telegram',
+                    'share_url': 'https://t.me/share/url?text=allme&url='
                     },
 
        'github': {'url': 'https://github.com/',
@@ -81,6 +92,7 @@ networks_data = {
                   'group': 'development',
                   'icon_name': 'ti-brand-github',
                   'repr_name': 'GitHub',
+                  'share_url': False
                   },
 
        'playmarket': {'url': 'https://play.google.com/store/apps/developer?id=',
@@ -88,6 +100,7 @@ networks_data = {
                       'group': 'development',
                       'icon_name': 'ti-brand-google-play',
                       'repr_name': 'Google Play',
+                      'share_url': False
                       },
 
        'linkedin': {'url': 'https://www.linkedin.com/in/',
@@ -95,6 +108,7 @@ networks_data = {
                     'group': 'social_media',
                     'icon_name': 'ti-brand-linkedin',
                     'repr_name': 'LinkedIn',
+                    'share_url': 'https://www.linkedin.com/sharing/share-offsite/?url='
                     }
 
               }

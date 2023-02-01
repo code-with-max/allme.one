@@ -7,7 +7,7 @@ from app.main import bp
 from app.extensions import db
 from app.models.links import Links
 from app.models.networks import networks_data
-from app.main.collector import collect_links_data
+from app.main.collector import collect_links_data, collect_share_data
 
 
 @bp.route('/<unique_link>/')
@@ -18,8 +18,16 @@ def short_list_of_links(unique_link):
     '''
     # TODO OperationalError
     user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
+    links_data = collect_links_data(user_list)
 
-    links_data, owner_is_paying = collect_links_data(user_list)
+    user_url = url_for('main.short_list_of_links',
+                       unique_link=unique_link,
+                       _external=True,
+                       )
+    share_data = collect_share_data(user_url)
+
+    owner_is_paying = user_list.user.is_paying()
+
     if current_user.is_authenticated:
         visitor_authenticated = True
     else:
@@ -33,6 +41,7 @@ def short_list_of_links(unique_link):
                            links_data=links_data,
                            visitor_authenticated=visitor_authenticated,
                            owner_is_paying=owner_is_paying,
+                           share_data=share_data,
                            )
 
 
