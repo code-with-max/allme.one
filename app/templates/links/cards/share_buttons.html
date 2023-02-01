@@ -1,0 +1,20 @@
+{# Requires 'share_data' dictionary from 'collect_share_data' #}
+{# in module 'main/links/collector.py' #}
+<!-- Share buttons -->
+{% if share_data %}
+<div class="card text-center">
+    <!-- <h5 class="card-title">Share with:</h5> -->
+    <div class="card-body">
+    <h6>Share with:</h6>
+    <!-- <div class="d-grid gap-2 d-md-block"> -->
+    <div class="btn-group btn-group gap-2" role="group" aria-label="Share with">
+    {% for key, data in share_data.items() %}
+            <!-- <div> -->
+            <a href="{{ data['share_url'] }}" class="btn btn-outline-primary"><i class="ti {{ data['icon'] }}"></i></a>
+            <!-- </div> -->
+    {% endfor %}
+    </div>
+    </div>
+</div>
+<br>
+{% endif %}
