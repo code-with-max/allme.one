@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of service{% endblock %}
+
+{% block content %}
+
 <style>
     [data-custom-class='body'], [data-custom-class='body'] * {
             background: transparent !important;
@@ -208,3 +214,8 @@
         <div style="color: #595959;font-size: 14px;font-family: Arial;padding-top:16px;">
         These terms of use were created using Termly's <a style="color: rgb(48, 48, 241) !important;" href="https://termly.io/products/terms-and-conditions-generator/">Terms and Conditions Generator</a>.
         </div>
+
+<div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+        <a href="{{ url_for('about.about') }}" class="btn btn-outline-secondary">Back</a>
+</div>
+{% endblock %}
