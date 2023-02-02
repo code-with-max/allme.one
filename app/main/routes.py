@@ -68,4 +68,6 @@ def settings():
 
 @bp.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html",
+                           visitor_authenticated=current_user.is_authenticated,
+                           )
