@@ -16,7 +16,7 @@
   <div class="col-sm-6 mb-3 mb-sm-0">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Add you messengersConnect social media</h5>
+        <h5 class="card-title">Connect social media</h5>
         <p class="card-text">Add you Facebook, VK, LinkedIn or other social media links.</p>
       </div>
     </div>
@@ -78,8 +78,18 @@
 <br> -->
 <div class="container text-center">
   <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
-  <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
-  <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">SignUp</a>
+  {% if visitor_authenticated %}
+    <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Home page</a>
+  {% else %}
+    <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+    <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">SignUp</a>
+  {% endif %}
+  </div>
+</div>
+<br>
+<div class="container text-center">
+  <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+  <a href="{{ url_for('about.about') }}" class="btn btn-outline-secondary btn-sm">About</a>
   </div>
 </div>
 <br>
