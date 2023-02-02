@@ -1,5 +1,11 @@
 {# https://www.allme.one/about/privacy_policy/ #}
 {# https://www.freeprivacypolicy.com/live/4da14349-4acd-4852-ab31-340c70729a22 #}
+
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy{% endblock %}
+
+{% block content %}
 <h1>Privacy Policy</h1>
 <p>Last updated: February 02, 2023</p>
 <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
@@ -186,3 +192,8 @@
 <ul>
 <li>By email: support@allme.one</li>
 </ul>
+
+<div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+    <a href="{{ url_for('about.about') }}" class="btn btn-outline-secondary">Back</a>
+</div>
+{% endblock %}
