@@ -122,7 +122,7 @@ class About(db.Model, SocialNetwork):
     links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
+        super().__init__(network_name='about', **kwargs)
 
     def __repr__(self) -> str:
         return f'<(about) User name: {self.username}>'
@@ -132,7 +132,7 @@ class Email(db.Model, SocialNetwork):
     links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
+        super().__init__(network_name='email', **kwargs)
 
     def __repr__(self) -> str:
         return f'<E-mail adress: {self.username}>'
