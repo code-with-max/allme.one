@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Index page{% endblock %}
+
+{% block content %} 
+
+<div class="card text-center">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Your card</h5>
+      <p class="card-text">All your networks on one page</p>
+      <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+      <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+      <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">SignUp</a>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      Share with one click
+    </div>
+  </div>
+{% endblock %}

@@ -70,4 +70,4 @@ def settings():
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
-    return render_template("index.html", centered_view=True)
+    return render_template("index.html")

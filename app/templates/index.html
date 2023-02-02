@@ -4,20 +4,84 @@
 
 {% block content %} 
 
-<div class="card text-center">
-    <div class="card-header">
-      Featured
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Your card</h5>
-      <p class="card-text">All your networks on one page</p>
-      <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
-      <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
-      <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">SignUp</a>
+<div class="containet text-center">
+  <br>
+  <h2>One simple card</h2>
+  All your media links in one place
+</div>
+<br>
+
+
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add you messengersConnect social media</h5>
+        <p class="card-text">Add you Facebook, VK, LinkedIn or other social media links.</p>
       </div>
     </div>
-    <div class="card-footer text-muted">
-      Share with one click
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add you messengers</h5>
+        <p class="card-text">Link to your Telegram, Discord or Whatsapp and other.</p>
+      </div>
     </div>
   </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">You a freelancer?</h5>
+        <p class="card-text">Share you GitHub, GitLab or Play Market developer page.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Tell about your podcast</h5>
+        <p class="card-text">Connect YouTube channel and link to podcast service.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Financial support</h5>
+        <p class="card-text">Your donation page links here.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Link your website</h5>
+        <p class="card-text">Add  website link to connect your entire online network in one place.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<!-- 
+<div class="card text-center">
+  <div class="card-body">
+    This is some text within a card body.
+  </div>
+</div>
+<br> -->
+<div class="container text-center">
+  <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+  <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+  <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">SignUp</a>
+  </div>
+</div>
+<br>
+{% include 'bottom_about.html' %}
 {% endblock %}
