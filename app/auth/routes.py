@@ -146,7 +146,7 @@ def send_mail():
     '''
     Resend email confirmation link
     '''
-    result = send_verification_email(current_user.email)
+    result = send_verification_email(current_user.email, action='confirm')
     if result:
         return redirect(url_for("main.index"))
     else:

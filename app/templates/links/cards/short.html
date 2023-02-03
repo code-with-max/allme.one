@@ -74,6 +74,25 @@
 </div>
 </br>
 {% endif %}
+<!-- Collections -->
+{% if links_data['collections'] %}
+<div class="card text-center">
+  <div class="card-header">
+    Collections
+  </div>
+  <div class="card-body">
+    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+      {% for key, data in links_data['collections'].items() %}
+      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+        <i class="ti {{ data['icon'] }}"></i>
+        {{ data['repr_name'] }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</br>
+{% endif %}
 <!-- Donations world -->
 {% if links_data['donate_world'] %}
 <div class="card text-center">
@@ -117,7 +136,7 @@
   {% set data = links_data['emails']['email'] %}
   <div class="card text-center">
     <div class="card-header">
-      {{ data['about'] }}
+      E-mail
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ data['username'] }}</h5>
@@ -125,7 +144,7 @@
       <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
         <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
           <i class="ti {{ data['icon'] }}"></i>
-          send E-mail
+          send
         </a>
       </div>
     </div>
