@@ -19,3 +19,4 @@ from app.main.links import playmarket
 from app.main.links import vk
 from app.main.links import linkedin
 from app.main.links import flickr
+from app.main.links import gitlab
