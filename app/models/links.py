@@ -25,6 +25,7 @@ class Links(db.Model):
     playmarket = (db.relationship('Playmarket', backref='links'))
     linkedin = (db.relationship('Linkedin', backref='links'))
     flickr = (db.relationship('Flickr', backref='links'))
+    gitlab = (db.relationship('Gitlab', backref='links'))
 
     def __repr__(self) -> str:
         return f'Unique link: {self.unique_link}'
@@ -74,9 +75,12 @@ class Links(db.Model):
 
         elif req == 'linkedin' and self.linkedin:
             return self.linkedin[0]
-        
+
         elif req == 'flickr' and self.flickr:
             return self.flickr[0]
+        
+        elif req == 'gitlab' and self.gitlab:
+            return self.gitlab[0]
 
         else:
             return None
@@ -105,6 +109,7 @@ class Links(db.Model):
         used.append(self.telegram[0]) if self.telegram else free.append('telegram')
         used.append(self.linkedin[0]) if self.linkedin else free.append('linkedin')
         used.append(self.flickr[0]) if self.flickr else free.append('flickr')
+        used.append(self.gitlab[0]) if self.gitlab else free.append('gitlab')
         return [used, free]
 
 
@@ -275,3 +280,13 @@ class Flickr(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<Flickr username: {self.username}>'
+
+
+class Gitlab(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='gitlab', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<GitLab username: {self.username}>'

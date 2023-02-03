@@ -119,4 +119,12 @@ networks_data = {
                   'share_url': False,
                   },
 
+       'gitlab': {'url': 'https://gitlab.com/',
+                  'is_free': True,
+                  'group': 'development',
+                  'icon_name': 'ti-brand-gitlab',
+                  'repr_name': 'GitLab',
+                  'share_url': False,
+                  },
+
               }
