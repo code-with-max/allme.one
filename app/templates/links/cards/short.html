@@ -6,13 +6,12 @@
 <!-- INFO (about, etc) -->
 {% if links_data['information'] %}
 {% set data = links_data['information']['about'] %}
-<div class="card text-center mx-auto d-block" style="max-width: 720px;">
+<div class="card mx-auto d-block text-center" style="max-width: 540px;">
   <div class="row g-0">
-    <div class="col-md-2">
-      <br>
+    <div class="col-md-4">
       <img src="{{ owner_gravatar }}" class="rounded mx-auto d-block" alt="...">
     </div>
-    <div class="col-md-10">
+    <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{{ data['username'] }}</h5>
         <p class="card-text">{{ data['description'] }}</p>
@@ -27,10 +26,11 @@
 <!-- Messengers -->
 {% if links_data['messengers'] %}
 <div class="card text-center">
-  <div class="card-header">
+  <!-- <div class="card-header">
     Messengers
-  </div>
+  </div> -->
   <div class="card-body">
+    <h6 class="card-title">Messengers</h6>
     <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
       {% for key, data in links_data['messengers'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
@@ -46,10 +46,11 @@
 <!-- Development -->
 {% if links_data['development'] %}
 <div class="card text-center">
-  <div class="card-header">
+  <!-- <div class="card-header">
     Development
-  </div>
+  </div> -->
   <div class="card-body">
+    <h6 class="card-title">Development</h6>
     <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
       {% for key, data in links_data['development'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
@@ -65,10 +66,11 @@
 <!-- Social media -->
 {% if links_data['social_media'] %}
 <div class="card text-center">
-  <div class="card-header">
+  <!-- <div class="card-header">
     Social media
-  </div>
+  </div> -->
   <div class="card-body">
+    <h6 class="card-title">Social media</h6>
     <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
       {% for key, data in links_data['social_media'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
@@ -84,10 +86,11 @@
 <!-- Collections -->
 {% if links_data['collections'] %}
 <div class="card text-center">
-  <div class="card-header">
+  <!-- <div class="card-header">
     Collections
-  </div>
+  </div> -->
   <div class="card-body">
+    <h6 class="card-title">Collections</h6>
     <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
       {% for key, data in links_data['collections'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
@@ -103,10 +106,11 @@
 <!-- Donations world -->
 {% if links_data['donate_world'] %}
 <div class="card text-center">
-  <div class="card-header">
+  <!-- <div class="card-header">
     Donations pages
-  </div>
+  </div> -->
   <div class="card-body">
+    <h6 class="card-title">Donations</h6>
     <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
       {% for key, data in links_data['donate_world'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
@@ -122,10 +126,11 @@
 <!-- Donations Russia -->
 {% if links_data['donate_russia'] %}
 <div class="card text-center">
-  <div class="card-header">
+  <!-- <div class="card-header">
     Donation from Russia
-  </div>
+  </div> -->
   <div class="card-body">
+    <h6 class="card-title">Donation from Russia</h6>
     <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
       {% for key, data in links_data['donate_russia'].items() %}
       <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
@@ -142,9 +147,9 @@
 {% if links_data['emails'] %}
   {% set data = links_data['emails']['email'] %}
   <div class="card text-center">
-    <div class="card-header">
+    <!-- <div class="card-header">
       E-mail
-    </div>
+    </div> -->
     <div class="card-body">
       <h5 class="card-title">{{ data['username'] }}</h5>
       <p class="card-text">{{ data['description'] }}</p>
