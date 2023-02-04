@@ -4,9 +4,10 @@
 
 {% block content %}
 <!-- INFO (about, etc) -->
+<br>
 {% if links_data['information'] %}
 {% set data = links_data['information']['about'] %}
-<div class="card mx-auto d-block text-center" style="max-width: 540px;">
+<div class="card mx-auto d-block text-center" style="max-width: 720px;">
   <div class="row g-0">
     <div class="col-md-4">
       <img src="{{ owner_gravatar }}" class="rounded mx-auto d-block" alt="...">
@@ -21,7 +22,6 @@
   </div>
 </div>
 </br>
-
 {% endif %}
 <!-- Messengers -->
 {% if links_data['messengers'] %}
