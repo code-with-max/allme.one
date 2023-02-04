@@ -5,17 +5,24 @@
 {% block content %}
 <!-- INFO (about, etc) -->
 {% if links_data['information'] %}
-  {% set data = links_data['information']['about'] %}
-  <div class="card text-center">
-    <div class="card-header">
-      {{ data['about'] }} Personal card
+{% set data = links_data['information']['about'] %}
+<div class="card text-center mx-auto d-block" style="max-width: 720px;">
+  <div class="row g-0">
+    <div class="col-md-2">
+      <br>
+      <img src="{{ owner_gravatar }}" class="rounded mx-auto d-block" alt="...">
     </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ data['username'] }}</h5>
-      <p class="card-text">{{ data['description'] }}</p>
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title">{{ data['username'] }}</h5>
+        <p class="card-text">{{ data['description'] }}</p>
+        <!-- <p class="card-text"><small class="text-muted">{{ owner_gravatar }}</small></p> -->
+      </div>
     </div>
   </div>
+</div>
 </br>
+
 {% endif %}
 <!-- Messengers -->
 {% if links_data['messengers'] %}

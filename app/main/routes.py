@@ -7,6 +7,7 @@ from app.main import bp
 from app.extensions import db
 from app.models.links import Links
 from app.models.networks import networks_data
+from app.models.gravatar import Gravatar
 from app.main.collector import collect_links_data, collect_share_data
 
 
@@ -18,6 +19,7 @@ def short_list_of_links(unique_link):
     '''
     # TODO OperationalError
     user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
+    gravatar = Gravatar(user_list.user.email)
     links_data = collect_links_data(user_list)
 
     user_url = url_for('main.short_list_of_links',
@@ -42,6 +44,7 @@ def short_list_of_links(unique_link):
                            visitor_authenticated=visitor_authenticated,
                            owner_is_paying=owner_is_paying,
                            share_data=share_data,
+                           owner_gravatar=gravatar.get_gravatar(),
                            )
 
 
