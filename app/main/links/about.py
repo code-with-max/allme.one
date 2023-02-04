@@ -34,8 +34,10 @@ def about(action):
         name = request.form['user_name']
         description = request.form['description']
 
-        about.username = name
-        about.description = description
+        name = name.strip()
+        desc = description.strip()
+        about.username = f'{name:.32}' if len(name) > 32 else name
+        about.description = f'{desc:.255}' if len(desc) > 255 else desc
 
         db.session.add(about)
         db.session.commit()

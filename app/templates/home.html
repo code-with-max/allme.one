@@ -3,6 +3,8 @@
 {% block title %}my page{% endblock %}
 
 {% block content %}
+
+{# not confirmed E-mail attention #}
 {% if not user.email_confirmed %}
 <br>
   <div class="container">
@@ -20,10 +22,15 @@
     </div>
   </div>
 {% endif %}
-<!-- SHARE LINKS -->
 <br>
+<!-- Unique Link -->
 <div class="container">
   {% include 'links/home/unique_link.html' %}
+</div>
+<br>
+<!-- Share Buttons -->
+<div class="container">
+  {% include 'links/cards/share_buttons.html' %}
 </div>
 <br>
 <!-- User added links -->

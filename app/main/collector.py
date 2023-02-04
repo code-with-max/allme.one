@@ -1,6 +1,4 @@
-# from app.main import bp
-# from app.extensions import db
-# from app.models.links import Links
+from flask import url_for
 from app.models.networks import networks_data
 
 
@@ -12,7 +10,7 @@ def collect_links_data(user_list: object) -> dict:
     user_list = collect_links_data(list_object)
     '''
     response = {}
-    user_is_paying = user_list.user.is_paying()  # TODO Need pay chech
+    user_is_paying = user_list.user.is_paying()  # TODO Need pay check
     user_links, free_links = user_list.get_links()
     for link in user_links:
         full_url = networks_data[link.network_name]['url'] + link.username
@@ -38,10 +36,14 @@ def collect_links_data(user_list: object) -> dict:
     return response
 
 
-def collect_share_data(user_url: str) -> dict:
+def collect_share_data(unique_link: str) -> dict:
     response = {}
     for key, data in networks_data.items():
         if data['share_url']:
+            user_url = url_for('main.short_list_of_links',
+                               unique_link=unique_link,
+                               _external=True,
+                               )
             share_data = {
                 'share_url': f"{data['share_url']}{user_url}",
                 'icon': data['icon_name'],

@@ -21,13 +21,7 @@ def short_list_of_links(unique_link):
     user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
     gravatar = Gravatar(user_list.user.email)
     links_data = collect_links_data(user_list)
-
-    user_url = url_for('main.short_list_of_links',
-                       unique_link=unique_link,
-                       _external=True,
-                       )
-    share_data = collect_share_data(user_url)
-
+    share_data = collect_share_data(unique_link)
     owner_is_paying = user_list.user.is_paying()
 
     if current_user.is_authenticated:
@@ -54,11 +48,13 @@ def home():
     ''' Draw control panel for logged user '''
     used_links, free_links = current_user.links[0].get_links()
     # I think need else more list of paid links...
+    share_data = collect_share_data(current_user.links[0].unique_link)
     return render_template('home.html',
                            user=current_user,
                            used_links=used_links,
                            free_links=free_links,
                            networks=networks_data,
+                           share_data=share_data,
                            )
 
 
