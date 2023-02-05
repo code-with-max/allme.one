@@ -127,4 +127,12 @@ networks_data = {
                   'share_url': False,
                   },
 
+       'stackoverflow': {'url': 'https://stackoverflow.com/users/',
+                         'is_free': True,
+                         'group': 'development',
+                         'icon_name': 'ti-brand-stackoverflow',
+                         'repr_name': 'stack overflow',
+                         'share_url': False,
+                         },
+
               }

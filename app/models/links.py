@@ -26,6 +26,7 @@ class Links(db.Model):
     linkedin = (db.relationship('Linkedin', backref='links'))
     flickr = (db.relationship('Flickr', backref='links'))
     gitlab = (db.relationship('Gitlab', backref='links'))
+    stackoverflow = (db.relationship('Stackoverflow', backref='links'))
 
     def __repr__(self) -> str:
         return f'Unique link: {self.unique_link}'
@@ -78,9 +79,12 @@ class Links(db.Model):
 
         elif req == 'flickr' and self.flickr:
             return self.flickr[0]
-        
+
         elif req == 'gitlab' and self.gitlab:
             return self.gitlab[0]
+
+        elif req == 'stackoverflow' and self.stackoverflow:
+            return self.stackoverflowb[0]
 
         else:
             return None
@@ -96,6 +100,7 @@ class Links(db.Model):
         free = []
         used.append(self.about[0]) if self.about else free.append('about')
         used.append(self.github[0]) if self.github else free.append('github')
+        used.append(self.telegram[0]) if self.telegram else free.append('telegram')
         used.append(self.playmarket[0]) if self.playmarket else free.append('playmarket')
         used.append(self.youtube[0]) if self.youtube else free.append('youtube')
         used.append(self.twitter[0]) if self.twitter else free.append('twitter')
@@ -106,10 +111,10 @@ class Links(db.Model):
         used.append(self.vkontakte[0]) if self.vkontakte else free.append('vk')
         used.append(self.cloudtips[0]) if self.cloudtips else free.append('cloudtips')
         used.append(self.email[0]) if self.email else free.append('email')
-        used.append(self.telegram[0]) if self.telegram else free.append('telegram')
         used.append(self.linkedin[0]) if self.linkedin else free.append('linkedin')
         used.append(self.flickr[0]) if self.flickr else free.append('flickr')
         used.append(self.gitlab[0]) if self.gitlab else free.append('gitlab')
+        used.append(self.stackoverflow[0]) if self.stackoverflow else free.append('stackoverflow')
         return [used, free]
 
 
@@ -290,3 +295,13 @@ class Gitlab(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<GitLab username: {self.username}>'
+
+
+class Stackoverflow(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='stackoverflow', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<stackoverflow username: {self.username}>'
