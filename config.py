@@ -13,6 +13,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')\
         or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    PAYWALL_PROJECT_KEY = os.environ.get('PAYWALL_PROJECT_KEY')
+    PAYWALL_SECRET_KEY = os.environ.get('PAYWALL_SECRET_KEY')
     MAIL_SERVER = os.environ.get('EMAIL_SERVER')
     MAIL_PORT = os.environ.get('EMAIL_PORT')
     MAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
