@@ -41,6 +41,9 @@ def create_app(config_class=Config):
     from app.about import bp as about_bp
     app.register_blueprint(about_bp, url_prefix='/about')
 
+    from app.paywall import bp as paywall_bp
+    app.register_blueprint(paywall_bp, url_prefix='/pay')
+
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
