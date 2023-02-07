@@ -16,27 +16,39 @@ def make_payment():
     Paymentwall.set_app_key(os.environ.get('PAYWALL_PROJECT_KEY'))
     Paymentwall.set_secret_key(os.environ.get('PAYWALL_SECRET_KEY'))
 
+    #  This part will using with self building widgets
+    #  https://docs.paymentwall.com/integration/checkout/onetime
+    #  https://docs.paymentwall.com/integration/checkout/subscription
     product = Product(
-        'product301',  # ag_external_id
+        'test_id_00',  # ag_external_id
         9.99,
         'USD',
-        'Gold Membership',
+        'PRO version for one year',
         Product.TYPE_FIXED
     )
 
     widget = Widget(
-        'user40012',  # uid
-        'p1_1',  # widget
-        [product],
+        't_user40013',  # uid
+        'pw_1',  # widget
+        [],  # [product], now empty for widgets API
         {
-            'email': 'user@hostname.com',
+            'email': 'admin@deadend.xyz',
             'history[registration_date]': 'registered_date_of_user',
             'ps': 'all',  # Replace it with specific payment system short code for single payment methods
-            'additional_param_name': 'additional_param_value'
+            'evaluation': 1,  # FIXME For test env only !!!
+            'additional_param': 'param_value',
+            'user_pay_code': '33195'
         }
     )
-    print(widget.get_url())
+    # print(widget.get_url())
     payurl = widget.get_url()
 
-    return render_template('paywall/make_payment.html', payurl=payurl)
-    # return url_for(payurl, _external=True)
+    return render_template('paywall/make_payment.html',
+                           payurl=payurl,
+                           centered_view=True,
+                           )
+
+
+@bp.route('/pingback/')
+def pingback():
+    return 'OK', 200
