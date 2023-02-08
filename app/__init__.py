@@ -48,6 +48,10 @@ def create_app(config_class=Config):
     def load_user(id):
         return User.query.get(int(id))
 
+    @app.context_processor
+    def inject_analytics():
+        return dict(GOOGLE_ANALYTICS_ID=app.config['GOOGLE_ANALYTICS_ID'])
+
     @app.route('/test/')
     def test_page():
         return '<h1>Testing the Flask Application Factory Pattern</h1>'
