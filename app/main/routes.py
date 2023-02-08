@@ -59,8 +59,9 @@ def home():
 
 
 @bp.route('/settings/')
+@login_required
 def settings():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated:  # FIXME Double check not needed
         return render_template("settings.html", centered_view=True)
     return redirect(url_for('main.index'))
 

@@ -1,3 +1,4 @@
+import uuid
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from app.extensions import db
@@ -12,11 +13,15 @@ class User(db.Model, UserMixin):
     created_date = db.Column(db.DateTime(timezone=True), default=func.now())
     last_visit = db.Column(db.DateTime(timezone=True))
     payment_state = db.Column(db.String(12), default='white')
+    payment_period = db.Column(db.String(12))
     payment_date = db.Column(db.DateTime(timezone=True))
-    payment_UUID = db.Column(db.String(36))
+    payment_UUID = db.Column(db.String(36), unique=True)
     API_key = db.Column(db.String(12))
     API_counter = db.Column(db.Integer, default=0)
     links = db.relationship('Links', backref='user')
+
+    def __init__(self):
+        self.payment_UUID = uuid.uuid4()
 
     def __repr__(self) -> str:
         return f'<e-mail: "{self.email}", user_links: {self.links}>'

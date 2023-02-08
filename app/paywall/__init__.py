@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint
 
 bp = Blueprint('paywall', __name__)

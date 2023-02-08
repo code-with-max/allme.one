@@ -1,20 +1,40 @@
-import os
-from flask import render_template, redirect, url_for, request
+import os, uuid
+from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from paymentwall import Paymentwall, Product, Widget, Pingback
 from app.paywall import bp
 from app.extensions import db
 from app.models.links import Links
+from app.models.user import User
 from app.models.networks import networks_data
 from app.models.gravatar import Gravatar
 from app.main.collector import collect_links_data, collect_share_data
 
 
+# FIXME Think I must using app.config
+pingback_endpoint = os.environ.get('PAYWALL_PINGBACK')
+
+
 @bp.route('/')
+@login_required
 def make_payment():
+    # TODO Need redirect 'Not confirmed page'
+    if not current_user.email_confirmed:
+        flash("Email not confirmed!", category='error')
+    # FIXME Think I must using app.config
     Paymentwall.set_api_type(Paymentwall.API_GOODS)
     Paymentwall.set_app_key(os.environ.get('PAYWALL_PROJECT_KEY'))
     Paymentwall.set_secret_key(os.environ.get('PAYWALL_SECRET_KEY'))
+
+    # FIX for OLD users.TODO: make some lambda for fix it
+    if not current_user.payment_UUID:
+        new_UUID = uuid.uuid4()
+        current_user.payment_UUID = new_UUID
+        db.session.add(current_user)
+        db.session.commit()
+
+    uid = current_user.payment_UUID
+    email = current_user.email
 
     #  This part will using with self building widgets
     #  https://docs.paymentwall.com/integration/checkout/onetime
@@ -31,17 +51,13 @@ def make_payment():
                 )
 
     widget = Widget(
-        't_00000001',  # uid
+        uid,  # uid
         'pw_1',  # widget
         [],  # [product], now empty for widgets API
         {
-            'email': 'admin@deadend.xyz',
-            'history[registration_date]': 'registered_date_of_user',
+            'email': email,
             'ps': 'all',  # Replace it with specific payment system short code for single payment methods
             'evaluation': 1,  # FIXME For test env only !!!
-            'additional_param': 'param_value',
-            'user_pay_code': '33195',
-            'USER_ID': 't_000000001',
         }
     )
     # print(widget.get_url())
@@ -53,32 +69,34 @@ def make_payment():
                            )
 
 
-@bp.route('/pingback/', methods=['GET'])
+@bp.route(f'/{pingback_endpoint}/', methods=['GET'])
 def pingback():
+    # FIXME Think I must using app.config
     Paymentwall.set_api_type(Paymentwall.API_GOODS)
     Paymentwall.set_app_key(os.environ.get('PAYWALL_PROJECT_KEY'))
     Paymentwall.set_secret_key(os.environ.get('PAYWALL_SECRET_KEY'))
 
-    # if request.method == 'GET':
-    #     print(request.args.items())
-    #     print(request.remote_addr)
-
+    # FIXME change '174.36.96.66' to 'request.remote_addr' in PROD
     pingback = Pingback({x:y for x, y in request.args.items()}, '174.36.96.66')
-    # print(dir(pingback))
 
     if pingback.validate():
         product_id = pingback.get_product().get_id()
+        uuid = pingback.get_user_id()
         print(product_id)
         if pingback.is_deliverable():
-            print(product_id)
+            if os.environ.get('FLASK_DEBUG'):
+                print(product_id)
+                print(uuid)
+                user = User.query.filter_by(payment_UUID=uuid).first()
+                print(user)
             pass
         elif pingback.is_cancelable():
             # withdraw the product
             pass
+        return 'OK', 200  # Paymentwall expects response to be OK, otherwise the pingback will be resent
 
-        # print('OK')  # Paymentwall expects response to be OK, otherwise the pingback will be resent
+    else:
+        if os.environ.get('FLASK_DEBUG'):
+            print(pingback.get_error_summary())
 
-    # else:
-        # print(pingback.get_error_summary())
-
-    return 'OK', 200
+    return 'Success', 200
