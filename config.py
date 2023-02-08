@@ -15,6 +15,8 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PAYWALL_PROJECT_KEY = os.environ.get('PAYWALL_PROJECT_KEY')
     PAYWALL_SECRET_KEY = os.environ.get('PAYWALL_SECRET_KEY')
+    PAYWALL_PINGBACK = os.environ.get('PAYWALL_PINGBACK')
+    GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
     MAIL_SERVER = os.environ.get('EMAIL_SERVER')
     MAIL_PORT = os.environ.get('EMAIL_PORT')
     MAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
