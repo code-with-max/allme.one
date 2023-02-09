@@ -20,6 +20,7 @@ def hash_password(password):
 
 def get_random_link(length):
     ''' Generate unique random link for new user '''
+    # FIXME Move it in self __init__()
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
     while result_str == Links.query.filter_by(unique_link=result_str).first():

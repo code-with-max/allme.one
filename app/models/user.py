@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     payment_UUID = db.Column(db.String(36), unique=True)
     API_key = db.Column(db.String(12))
     API_counter = db.Column(db.Integer, default=0)
-    links = db.relationship('Links', backref='user')
+    links = db.relationship('Links', backref='user', cascade='all, delete-orphan')
 
     def __init__(self, *args, **kwargs):
         self.payment_UUID = uuid.uuid4()
