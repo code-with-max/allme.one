@@ -1,10 +1,12 @@
-from flask import url_for, flash, render_template
+from flask import url_for, redirect, flash, render_template
 from flask_mail import Message
+from flask_login import current_user
 from itsdangerous import SignatureExpired, BadTimeSignature
 from smtplib import SMTPServerDisconnected
 from app.extensions import mail
 from app.auth import s  # FIXME I think need another variable name
 from config import Config
+from functools import wraps
 
 
 def send_verification_email(email_adress: str, action: str) -> bool:
@@ -64,3 +66,18 @@ def validate_token(token: str) -> bool | str:
     else:
         # flash("Link approved", category='success')
         return email
+
+
+def confirm_required(func):
+    '''
+    Check email confirmation decorator
+    '''
+    # FIXME its not work.
+    # Cathed werkzeug.routing.exceptions.BuildError
+    @wraps
+    def wrapper(*args, **kwargs):
+        if not current_user.email_confirmed:
+            flash("Please, confirm you email", category='warning')
+            return redirect(url_for("auth.email_not_confirmed"))
+        return func(*args, **kwargs)
+    return wrapper

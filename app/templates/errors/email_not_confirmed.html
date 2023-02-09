@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} - email not confirmed{% endblock %}
+
+{% block content %} 
+
+<div class="container text-center">
+    <h4>We are sorry </h4>
+    <h5>But your email is still not confirmed</h5>
+    <p>Check your mailbox or <a href="{{ url_for('auth.send_mail') }}">request new email</a></p>
+    <br>
+    <p>For all questions <a href="mailto:support@allme.one">support@allme.one</a></p>
+</div>
+{% endblock %}

@@ -9,4 +9,5 @@ s = URLSafeTimedSerializer(Config.URL_STS_KEY)
 
 
 from app.auth import routes
-from app.auth.helpers import send_verification_email
+from app.auth.utility import send_verification_email
+from app.auth.utility import confirm_required
