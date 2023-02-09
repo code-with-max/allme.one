@@ -20,7 +20,7 @@ pingback_endpoint = os.environ.get('PAYWALL_PINGBACK')
 def make_payment():
     # TODO Need redirect 'Not confirmed page'
     if not current_user.email_confirmed:
-        flash("Email not confirmed!", category='error')
+        flash("Email not confirmed!", category='danger')
     # FIXME Think I must using app.config
     Paymentwall.set_api_type(Paymentwall.API_GOODS)
     Paymentwall.set_app_key(os.environ.get('PAYWALL_PROJECT_KEY'))
