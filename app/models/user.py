@@ -20,8 +20,9 @@ class User(db.Model, UserMixin):
     API_counter = db.Column(db.Integer, default=0)
     links = db.relationship('Links', backref='user')
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.payment_UUID = uuid.uuid4()
+        super().__init__(*args, **kwargs)
 
     def __repr__(self) -> str:
         return f'<e-mail: "{self.email}", user_links: {self.links}>'
