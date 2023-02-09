@@ -27,6 +27,8 @@ class Links(db.Model):
     flickr = (db.relationship('Flickr', backref='links', cascade='all, delete-orphan'))
     gitlab = (db.relationship('Gitlab', backref='links', cascade='all, delete-orphan'))
     stackoverflow = (db.relationship('Stackoverflow', backref='links', cascade='all, delete-orphan'))
+    steamdeveloper = (db.relationship('Steamdeveloper', backref='links', cascade='all, delete-orphan'))
+    steampublisher = (db.relationship('Steampublisher', backref='links', cascade='all, delete-orphan'))
 
     def __repr__(self) -> str:
         return f'Unique link: {self.unique_link}'
@@ -86,6 +88,12 @@ class Links(db.Model):
         elif req == 'stackoverflow' and self.stackoverflow:
             return self.stackoverflowb[0]
 
+        elif req == 'steamdeveloper' and self.steamdeveloper:
+            return self.steamdeveloper[0]
+
+        elif req == 'steampublisher' and self.steampublisher:
+            return self.steampublisher[0]
+
         else:
             return None
 
@@ -115,6 +123,8 @@ class Links(db.Model):
         used.append(self.flickr[0]) if self.flickr else free.append('flickr')
         used.append(self.gitlab[0]) if self.gitlab else free.append('gitlab')
         used.append(self.stackoverflow[0]) if self.stackoverflow else free.append('stackoverflow')
+        used.append(self.steamdeveloper[0]) if self.steamdeveloper else free.append('steamdeveloper')
+        used.append(self.steampublisher[0]) if self.steampublisher else free.append('steampublisher')
         return [used, free]
 
 
@@ -305,3 +315,23 @@ class Stackoverflow(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<stackoverflow username: {self.username}>'
+
+
+class Steamdeveloper(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='steamdeveloper', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<Steam developer username: {self.username}>'
+
+
+class Steampublisher(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='steampublisher', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<Steam publisher username: {self.username}>'
