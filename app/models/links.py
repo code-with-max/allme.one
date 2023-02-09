@@ -4,7 +4,7 @@ from app.extensions import db
 
 class Links(db.Model):
     '''User social networks links model for SQLAlchemy'''
-    # __tablename__ = links
+    # __tablename__ = 'links'
     # may be using key "uselist=False" in relationships
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

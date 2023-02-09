@@ -5,7 +5,7 @@ from flask import request
 from flask_login import login_required, current_user
 from app.main import bp
 from app.extensions import db
-from app.models.links import Links
+from app.models import Links
 from app.models.networks import networks_data
 from app.models.gravatar import Gravatar
 from app.main.collector import collect_links_data, collect_share_data
