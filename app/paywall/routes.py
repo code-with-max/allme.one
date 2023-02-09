@@ -9,6 +9,7 @@ from app.models.user import User
 from app.models.networks import networks_data
 from app.models.gravatar import Gravatar
 from app.main.collector import collect_links_data, collect_share_data
+from app.auth import confirm_required
 
 
 # FIXME Think I must using app.config
@@ -17,10 +18,11 @@ pingback_endpoint = os.environ.get('PAYWALL_PINGBACK')
 
 @bp.route('/')
 @login_required
+# @confirm_required  # FIXME decorator raise wergzeug errors :()
 def make_payment():
-    # TODO Need redirect 'Not confirmed page'
     if not current_user.email_confirmed:
-        flash("Email not confirmed!", category='danger')
+        return redirect(url_for("auth.email_not_confirmed"))
+
     # FIXME Think I must using app.config
     Paymentwall.set_api_type(Paymentwall.API_GOODS)
     Paymentwall.set_app_key(os.environ.get('PAYWALL_PROJECT_KEY'))
