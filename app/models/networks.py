@@ -135,4 +135,19 @@ networks_data = {
                          'share_url': False,
                          },
 
+       'steamdeveloper': {'url': 'https://store.steampowered.com/search/?developer=',
+                          'is_free': True,
+                          'group': 'development',
+                          'icon_name': 'ti-brand-steam',
+                          'repr_name': 'Steam developer',
+                          'share_url': False,
+                          },
+
+       'steampublisher': {'url': 'https://store.steampowered.com/search/?publisher=',
+                          'is_free': False,
+                          'group': 'development',
+                          'icon_name': 'ti-brand-steam',
+                          'repr_name': 'Steam publisher',
+                          'share_url': False,
+                          },
               }
