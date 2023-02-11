@@ -4,8 +4,7 @@ https://stackoverflow.com/questions/25319690/how-do-i-run-a-flask-app-in-gunicor
 
 Create a file wsgi.py under your project with the following contents, then point Gunicorn at it.
 
-from my_project import create_app
-
+from app import create_app
 app = create_app()
 
 gunicorn -w 4 wsgi:app

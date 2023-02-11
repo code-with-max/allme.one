@@ -11,7 +11,7 @@ class Apikey(db.Model):
     name = db.Column(db.String(16))
     key = db.Column(db.String(32), unique=True)
     count = db.Column(db.Integer, default=0)
-    coun2 = db.Column(db.Integer, default=0)
+    coun2 = db.Column(db.Integer, default=0)  # FIXME Delete this row
     last_used = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     def __init__(self, *args, **kwargs) -> None:
@@ -22,8 +22,11 @@ class Apikey(db.Model):
         super().__init__(name=gname, key=gkey, count=0, *args, **kwargs)
 
     def increase(self) -> int:
+        # Not works. Not used :(
         self.count += 1
-        return self.name
+        db.session.add(self.count)
+        db.session.commit()
+        return self.count
 
     def __repr__(self) -> str:
         return f'{self.name}: used:{self.count} times. KEY: {self.key}'
