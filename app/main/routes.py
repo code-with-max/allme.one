@@ -18,6 +18,10 @@ def short_list_of_links(unique_link):
     Avaible groups for filtering: \n
     '''
     # TODO OperationalError
+    # TODO Query syntax changed in ver. 3.0.x
+    # Must be:
+    # user_list = db.one_or_404(db.select(Links).filter_by(unique_link=unique_link))
+    # https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/
     user_list = Links.query.filter_by(unique_link=unique_link).first_or_404()
     gravatar = Gravatar(user_list.user.email)
     links_data = collect_links_data(user_list)

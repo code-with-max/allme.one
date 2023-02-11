@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}API{% endblock %}
+
+{% block content %}
+<br>
+<div class="container text-center">
+  <h4>API keys</h4>
+  <hr>
+    {% for key in keys %}
+    <p>
+    <h6>{{ key.key }}</h6>
+    {{ key.name }}, requests count: {{ key.count }}<br>
+    Last time used: {{ key.last_used }}
+    </p>
+    <a href="{{ url_for('api2.delete_key', key=key.key) }}" class="btn btn-outline-danger">Delete key</a>
+    <hr>
+    {% endfor %}
+    <br>
+  <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+    {% if can_create %}
+      <a href="{{ url_for('api2.add_key') }}" class="btn btn-outline-success">Add key</a>
+    {% else %}
+      <h6>Key limit reached</h6>
+      {% if not user_is_paying %}
+        <a href="{{ url_for('paywall.make_payment') }}" class="btn btn-info">Go to PRO for more keys</a>
+      {% endif %}
+    {% endif %}
+    <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary">Home page</a>
+  </div>
+</div>
+{% endblock %}
