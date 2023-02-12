@@ -8,44 +8,41 @@
 {% if links_data['information'] %}
 {% set data = links_data['information']['about'] %}
 <div class="card mx-auto d-block text-center" style="max-width: 720px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="{{ owner_gravatar }}" class="rounded mx-auto d-block" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ data['username'] }}</h5>
-        <p class="card-text">{{ data['description'] }}</p>
-        <!-- <p class="card-text"><small class="text-muted">{{ owner_gravatar }}</small></p> -->
-      </div>
-    </div>
+  <div class="card-body">
+    <img src="{{ owner_gravatar }}" class="rounded mx-auto d-block" alt="...">
+    <h5 class="card-title">{{ data['username'] }}</h5>
+    <p class="card-text">{{ data['description'] }}</p>
   </div>
 </div>
 </br>
 {% endif %}
+<div class="row row-cols-1 row-cols-md-2 g-2"> {# row #}
 <!-- Messengers -->
 {% if links_data['messengers'] %}
-<div class="card text-center">
+<div class="col">
+<div class="card text-center h-100">
   <!-- <div class="card-header">
     Messengers
   </div> -->
-  <div class="card-body">
-    <h6 class="card-title">Messengers</h6>
-    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
-      {% for key, data in links_data['messengers'].items() %}
-      <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
-        <i class="ti {{ data['icon'] }}"></i>
-        {{ data['repr_name'] }}
-      </a>
-      {% endfor %}
+    <div class="card-body">
+      <h6 class="card-title">Messengers</h6>
+      <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+        {% for key, data in links_data['messengers'].items() %}
+        <a href="{{ data['full_url'] }}" target=”_blank” class="btn btn-outline-primary">
+          <i class="ti {{ data['icon'] }}"></i>
+          {{ data['repr_name'] }}
+        </a>
+        {% endfor %}
+      </div>
     </div>
   </div>
-</div>
 </br>
+</div>
 {% endif %}
 <!-- Development -->
 {% if links_data['development'] %}
-<div class="card text-center">
+<div class="col">
+<div class="card text-center h-100">
   <!-- <div class="card-header">
     Development
   </div> -->
@@ -62,10 +59,12 @@
   </div>
 </div>
 </br>
+</div>
 {% endif %}
 <!-- Social media -->
 {% if links_data['social_media'] %}
-<div class="card text-center">
+<div class="col">
+<div class="card text-center h-100">
   <!-- <div class="card-header">
     Social media
   </div> -->
@@ -82,10 +81,12 @@
   </div>
 </div>
 </br>
+</div>
 {% endif %}
 <!-- Collections -->
 {% if links_data['collections'] %}
-<div class="card text-center">
+<div class="col">
+<div class="card text-center h-100">
   <!-- <div class="card-header">
     Collections
   </div> -->
@@ -102,10 +103,12 @@
   </div>
 </div>
 </br>
+</div>
 {% endif %}
 <!-- Donations world -->
 {% if links_data['donate_world'] %}
-<div class="card text-center">
+<div class="col">
+<div class="card text-center h-100">
   <!-- <div class="card-header">
     Donations pages
   </div> -->
@@ -122,10 +125,12 @@
   </div>
 </div>
 </br>
+</div>
 {% endif %}
 <!-- Donations Russia -->
 {% if links_data['donate_russia'] %}
-<div class="card text-center">
+<div class="col">
+<div class="card text-center h-100">
   <!-- <div class="card-header">
     Donation from Russia
   </div> -->
@@ -142,11 +147,13 @@
   </div>
 </div>
 </br>
+</div>
 {% endif %}
 <!-- E-mails -->
 {% if links_data['emails'] %}
+<div class="col">
   {% set data = links_data['emails']['email'] %}
-  <div class="card text-center">
+  <div class="card text-center h-100">
     <!-- <div class="card-header">
       E-mail
     </div> -->
@@ -162,7 +169,10 @@
     </div>
   </div>
 </br>
+</div>
 {% endif %}
+</div> {# end row #}
+<br>
 <!-- Share buttons -->
 {% include 'links/cards/share_buttons.html' %}
 <!-- Bottom buttons -->

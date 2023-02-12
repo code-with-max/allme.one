@@ -6,7 +6,7 @@
       <h5 class="card-title">{{ user.links[0].email[0].about }}</h5>
       <p class="card-text">{{ user.links[0].email[0].description }}</p>
       <div class="d-grid col-{{ button_size }} mx-auto">
-        <a href="{{ url_for('main.email', action='edit') }}" class="btn btn-primary">Edit</a>
+        <a href="{{ url_for('main.email', action='edit') }}" class="btn btn-outline-primary">Edit</a>
       </div>
     </div>
   </div>
