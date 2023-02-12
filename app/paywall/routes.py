@@ -12,6 +12,7 @@ from app.main.collector import collect_links_data, collect_share_data
 from app.auth import confirm_required
 
 
+
 # FIXME Think I must using app.config
 pingback_endpoint = os.environ.get('PAYWALL_PINGBACK')
 
@@ -84,17 +85,19 @@ def pingback():
     if pingback.validate():
         product_id = pingback.get_product().get_id()
         uuid = pingback.get_user_id()
-        print(product_id)
-        if pingback.is_deliverable():
-            if os.environ.get('FLASK_DEBUG'):
-                print(product_id)
-                print(uuid)
-                user = User.query.filter_by(payment_UUID=uuid).first()
-                print(user)
-            pass
-        elif pingback.is_cancelable():
-            # withdraw the product
-            pass
+        user = User.query.filter_by(payment_UUID=uuid).first()
+        if os.environ.get('FLASK_DEBUG'):
+            print(f'Product: {product_id}')
+            print(f'uuid: {uuid}')
+            print(user)
+        if user:
+            if pingback.is_deliverable():
+                if user.update_payment_status(product_id):
+                    db.session.add(user)
+                    db.session.commit()
+            elif pingback.is_cancelable():
+                # withdraw the product
+                pass
         return 'OK', 200  # Paymentwall expects response to be OK, otherwise the pingback will be resent
 
     else:
