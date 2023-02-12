@@ -40,18 +40,18 @@ def api_list_of_links():
             return jsonify({'error': 'Card link required'})
     # Validate user
     user_api = db.one_or_404(db.select(Apikey).filter_by(key=api_key))
-    print(user_api)
     if not user_api.user.is_paying():
         user_api.count += 1
         if user_api.count > 99:  # TODO move request limit to app config
             return jsonify({'error': 'API key request limit has been reached'})
+        else:
+            db.session.commit()
     print(user_api.count)
     # Validate list of links
     list = db.one_or_404(db.select(Links).filter_by(unique_link=unique_link))
     # Get links data
     links_data = collect_links_data(list)
     # And return :)
-    db.session.commit()
     return jsonify(links_data)
 
 
