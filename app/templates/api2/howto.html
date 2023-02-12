@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}API{% endblock %}
+
+{% block content %}
+{% set endpoint = url_for('api2.api_list_of_links', _external=True) %}
+{% set testkey = 'cf0ab30a772346bbad73dbac1d52e0fb' %}
+{% set testcard = 'fdfgmfodt' %}
+{% set full_url = url_for('api2.api_list_of_links', card=testcard, key=testkey, _external=True) %}
+<div class="container text-left">
+  <h1 class="display-2">Using allme.one API</h1>
+  <hr>
+  <br>
+  <h1 class="display-5">How to make an API call</h1>
+  <p>Send a GET or POST request to the endpoint with required parameters.</p>
+  <p><strong>{{ endpoint }}</strong> - point for request<br>
+  <strong>card</strong> - unique string user page<br>
+  <strong>key</strong> - your API key</p>
+  <br>
+  <h1 class="display-5">Example of GET request:</h1>
+  <p><strong>{{ full_url }}</strong></p>
+  <p><a href="{{ full_url }}">Try it right now</a></p>
+  <br>
+  <h1 class="display-5">Example of POST request:</h1>
+  <p>POST request must contain a valid json object, for example:</p>
+  <div class="card card-body">
+    <pre><code>
+    {
+      "card": "fdfgmfodt",
+      "key": "cf0ab30a772346bbad73dbac1d52e0fb"
+    }
+    </code></pre>
+  </div>
+  <br>
+  <h1 class="display-5">Response</h1>
+  <p>The server response will contain a json object that you can process with the available means</p>
+  <p>
+    <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#collapseResponse" role="button" aria-expanded="false" aria-controls="collapseResponse">
+      See example:
+    </a>
+  </p>
+  <div class="collapse" id="collapseResponse">
+    {% include 'api2/response_example.html' %}
+  </div>
+</div>
+<br>
+<div class="container">
+{% if visitor_authenticated %}
+<div class="card">
+  <div class="card-body">
+    <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+    <a href="{{ url_for('api2.keys') }}" class="btn btn-outline-success">Manage API keys</a>
+    </div>
+  </div>
+</div>
+{% else %}
+  <div class="card">
+    <div class="card-body">
+      <div class="d-grid gap-2 col-{{ button_size }} mx-auto">
+      <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success">Login</a>
+      </div>
+    </div>
+  </div>
+{% endif %}
+<br>
+{% include 'links/cards/bottom_buttons.html' %}
+{% include 'bottom_about.html' %}
+</div>
+{% endblock %}
