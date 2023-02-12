@@ -92,3 +92,10 @@ def add_key():
     current_user.api_keys.append(new_key)
     db.session.commit()
     return redirect(url_for('api2.keys'))
+
+
+@bp.route('/howto/')
+def howto():
+    return render_template('api2/howto.html',
+                           visitor_authenticated=current_user.is_authenticated,
+                           )
