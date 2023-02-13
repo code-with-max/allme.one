@@ -28,5 +28,8 @@ class Apikey(db.Model):
         db.session.commit()
         return self.count
 
+    def last_used_update(self):
+        self.last_used = func.now()
+
     def __repr__(self) -> str:
         return f'{self.name}: used:{self.count} times. KEY: {self.key}'

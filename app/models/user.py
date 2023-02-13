@@ -11,6 +11,8 @@ class User(db.Model, UserMixin):
     to set 'payment_state' use:
     'white': free
     'silver': user is payd
+    For check payment status: 
+    user.is_paying() -> bool
     '''
     # __tablename__ = user
     id = db.Column(db.Integer, primary_key=True)
@@ -45,12 +47,12 @@ class User(db.Model, UserMixin):
         return self.links[0]
 
     def update_payment_status(self, product_id: str) -> bool:
-        if product_id == 'SKU_02':  # TODO move product code to other list
+        if product_id == 'SKU02':  # TODO move product code to other list
             self.payment_state = 'silver'
             self.payment_period = 'year'
             self.payment_date = func.now()
             return True  # FIXME may be need commit db session here
-        elif product_id == 'SKU_03':
+        elif product_id == 'SKU03':
             self.payment_state = 'silver'
             self.payment_period = 'month'
             self.payment_date = func.now()

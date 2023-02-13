@@ -44,12 +44,14 @@ def api_list_of_links():
     if not user_api:
         return jsonify({'error': 'API key not found'})
     if not user_api.user.is_paying():
-        user_api.count += 1
         if user_api.count > 99:  # TODO move request limit to app config
             return jsonify({'error': 'API key request limit has been reached'})
         else:
+            user_api.count += 1
             db.session.commit()
-    print(user_api.count)
+    else:
+        user_api.last_used_update()
+        db.session.commit()
     # Validate list of links
     # list = db.one_or_404(db.select(Links).filter_by(unique_link=unique_link))
     list = Links.query.filter_by(unique_link=unique_link).first()

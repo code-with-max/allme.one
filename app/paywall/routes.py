@@ -61,6 +61,7 @@ def make_payment():
             'email': email,
             'ps': 'all',  # Replace it with specific payment system short code for single payment methods
             'evaluation': 1,  # FIXME For test env only !!!
+            'success_url': url_for('pay.success', _external=True)
         }
     )
     # print(widget.get_url())
@@ -79,17 +80,24 @@ def pingback():
     Paymentwall.set_app_key(os.environ.get('PAYWALL_PROJECT_KEY'))
     Paymentwall.set_secret_key(os.environ.get('PAYWALL_SECRET_KEY'))
 
-    # FIXME change '174.36.96.66' to 'request.remote_addr' in PROD
-    pingback = Pingback({x:y for x, y in request.args.items()}, '174.36.96.66')
+    if os.environ.get('FLASK_DEBUG'):
+        # Pingback IP must be in 'white list' from paymentwall API
+        # https://github.com/paymentwall/paymentwall-python
+        r_addr = '174.36.96.66'
+    else:
+        r_addr = request.remote_addr
+
+    pingback = Pingback({x:y for x, y in request.args.items()}, r_addr)
 
     if pingback.validate():
         product_id = pingback.get_product().get_id()
         uuid = pingback.get_user_id()
         user = User.query.filter_by(payment_UUID=uuid).first()
+
         if os.environ.get('FLASK_DEBUG'):
             print(f'Product: {product_id}')
-            print(f'uuid: {uuid}')
             print(user)
+
         if user:
             if pingback.is_deliverable():
                 if user.update_payment_status(product_id):
@@ -105,3 +113,9 @@ def pingback():
             print(pingback.get_error_summary())
 
     return 'Success', 200
+
+
+@bp.route('/success/')
+def success():
+    flash("Payment accepted. Now you a PRO :)", category='success')
+    return redirect(url_for('main.home'))
