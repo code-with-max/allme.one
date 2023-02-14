@@ -12,7 +12,6 @@ from app.main.collector import collect_links_data, collect_share_data
 from app.auth import confirm_required
 
 
-
 # FIXME Think I must using app.config
 pingback_endpoint = os.environ.get('PAYWALL_PINGBACK')
 
@@ -61,7 +60,7 @@ def make_payment():
             'email': email,
             'ps': 'all',  # Replace it with specific payment system short code for single payment methods
             'evaluation': 1,  # FIXME For test env only !!!
-            'success_url': url_for('pay.success', _external=True)
+            'success_url': url_for('paywall.success', _external=True)
         }
     )
     # print(widget.get_url())
@@ -101,7 +100,7 @@ def pingback():
         if user:
             if pingback.is_deliverable():
                 if user.update_payment_status(product_id):
-                    db.session.add(user)
+                    # db.session.add(user)
                     db.session.commit()
             elif pingback.is_cancelable():
                 # withdraw the product
@@ -111,6 +110,7 @@ def pingback():
     else:
         if os.environ.get('FLASK_DEBUG'):
             print(pingback.get_error_summary())
+            # TODO implement mail notify about errors
 
     return 'Success', 200
 

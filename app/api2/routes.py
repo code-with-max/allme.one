@@ -51,6 +51,7 @@ def api_list_of_links():
             db.session.commit()
     else:
         user_api.last_used_update()
+        # db.session.add(user_api)
         db.session.commit()
     # Validate list of links
     # list = db.one_or_404(db.select(Links).filter_by(unique_link=unique_link))
