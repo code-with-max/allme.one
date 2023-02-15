@@ -56,7 +56,7 @@ networks_data = {
                    },
 
        'buymeacoffe': {'url': 'https://www.buymeacoffee.com/',
-                       'is_free': True,
+                       'is_free': False,
                        'group': 'donate_world',
                        'icon_name': 'ti-currency-dollar',
                        'repr_name': 'Buy me a coffee',
@@ -64,7 +64,7 @@ networks_data = {
                        },
 
        'cloudtips': {'url': 'https://pay.cloudtips.ru/p/',
-                     'is_free': True,
+                     'is_free': False,
                      'group': 'donate_russia',
                      'icon_name': 'ti-currency-rubel',
                      'repr_name': 'CloudTips',
