@@ -16,6 +16,7 @@ class Gravatar:
     Simple implement of gravatar service use for images
     http://en.gravatar.com/site/implement/images/
     '''
+
     def __init__(self: object, email: str):
         self.email = email.encode('utf-8').lower()
         self.base_url = "https://www.gravatar.com/avatar/"
