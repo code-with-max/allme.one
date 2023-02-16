@@ -1,8 +1,6 @@
 # allme.one
 
-<a href="https://www.allme.one" target="_blank">alt="allme.one"</a>
-
-![Uptime Robot status](https://img.shields.io/uptimerobot/status/#793732239) ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/#793732239)
+[allme.one](https://www.allme.one)
 
 A simple service aggregator of user links to social networks and messengers. Allows you to create a single card with links to messengers and social networks.
 
