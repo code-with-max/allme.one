@@ -150,4 +150,12 @@ networks_data = {
                           'repr_name': 'Steam publisher',
                           'share_url': False,
                           },
+       'patreon': {'url': 'https://www.patreon.com/',
+                   'is_free': False,
+                   'group': 'donate_world',
+                   'icon_name': 'ti-brand-patreon',
+                   'repr_name': 'Patreon',
+                   'share_url': False,
+                   },
+
               }

@@ -24,7 +24,15 @@ Available services:
 - Buymeacoffee
 - CloudTips
 - Boosty
+- Patreon
+
+[Autor personal card](https://www.allme.one/fdfgmfodt/)
 
 <a href="https://www.buymeacoffee.com/maxtrash" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="32" width="136"></a>
 
-<a href="https://pay.cloudtips.ru/p/5acab2cd" target="_blank"><img src="assets/donations/qrImage.png" alt="Donate with russian card" height="136" width="136"></a>
+
+Russian cards:
+
+[Boosty](https://boosty.to/codewithmax)
+
+[CloudTips](https://pay.cloudtips.ru/p/5acab2cd)

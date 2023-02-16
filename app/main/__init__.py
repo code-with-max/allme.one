@@ -23,3 +23,4 @@ from app.main.links import gitlab
 from app.main.links import stackoverflow
 from app.main.links import steampublisher
 from app.main.links import steamdeveloper
+from app.main.links import patreon

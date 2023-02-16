@@ -21,6 +21,7 @@ class Links(db.Model):
     cloudtips = (db.relationship('Cloudtips', backref='links', cascade='all, delete-orphan'))
     boosty = (db.relationship('Boosty', backref='links', cascade='all, delete-orphan'))
     telegram = (db.relationship('Telegram', backref='links', cascade='all, delete-orphan'))
+    patreon = (db.relationship('Patreon', backref='links', cascade='all, delete-orphan'))
     github = (db.relationship('Github', backref='links', cascade='all, delete-orphan'))
     playmarket = (db.relationship('Playmarket', backref='links', cascade='all, delete-orphan'))
     linkedin = (db.relationship('Linkedin', backref='links', cascade='all, delete-orphan'))
@@ -93,6 +94,9 @@ class Links(db.Model):
 
         elif req == 'steampublisher' and self.steampublisher:
             return self.steampublisher[0]
+        
+        elif req == 'patreon' and self.patreon:
+            return self.patreon[0]
 
         else:
             return None
@@ -117,6 +121,7 @@ class Links(db.Model):
         used.append(self.github[0]) if self.github else free.append('github')
         used.append(self.playmarket[0]) if self.playmarket else free.append('playmarket')
         used.append(self.twitter[0]) if self.twitter else free.append('twitter')
+        used.append(self.patreon[0]) if self.patreon else free.append('patreon')
         used.append(self.buymeacoffe[0]) if self.buymeacoffe else free.append('buymeacoffe')
         used.append(self.boosty[0]) if self.boosty else free.append('boosty')
         used.append(self.cloudtips[0]) if self.cloudtips else free.append('cloudtips')
@@ -335,3 +340,13 @@ class Steampublisher(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<Steam publisher username: {self.username}>'
+
+
+class Patreon(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='patreon', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<Patreon username: {self.username}>'
