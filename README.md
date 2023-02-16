@@ -18,6 +18,7 @@ Available services:
 - GitHub
 - GitLab
 - Google Play
+- Pinterest
 - stack overflow
 - Steam developer
 - Steam publisher

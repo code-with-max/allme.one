@@ -28,6 +28,7 @@ class Links(db.Model):
     flickr = (db.relationship('Flickr', backref='links', cascade='all, delete-orphan'))
     gitlab = (db.relationship('Gitlab', backref='links', cascade='all, delete-orphan'))
     stackoverflow = (db.relationship('Stackoverflow', backref='links', cascade='all, delete-orphan'))
+    pinterest = (db.relationship('Pinterest', backref='links', cascade='all, delete-orphan'))
     steamdeveloper = (db.relationship('Steamdeveloper', backref='links', cascade='all, delete-orphan'))
     steampublisher = (db.relationship('Steampublisher', backref='links', cascade='all, delete-orphan'))
 
@@ -94,9 +95,12 @@ class Links(db.Model):
 
         elif req == 'steampublisher' and self.steampublisher:
             return self.steampublisher[0]
-        
+
         elif req == 'patreon' and self.patreon:
             return self.patreon[0]
+
+        elif req == 'pinterest' and self.pinterest:
+            return self.pinterest[0]
 
         else:
             return None
@@ -125,6 +129,7 @@ class Links(db.Model):
         used.append(self.buymeacoffe[0]) if self.buymeacoffe else free.append('buymeacoffe')
         used.append(self.boosty[0]) if self.boosty else free.append('boosty')
         used.append(self.cloudtips[0]) if self.cloudtips else free.append('cloudtips')
+        used.append(self.pinterest[0]) if self.pinterest else free.append('pinterest')
         used.append(self.flickr[0]) if self.flickr else free.append('flickr')
         used.append(self.gitlab[0]) if self.gitlab else free.append('gitlab')
         used.append(self.stackoverflow[0]) if self.stackoverflow else free.append('stackoverflow')
@@ -350,3 +355,13 @@ class Patreon(db.Model, SocialNetwork):
 
     def __repr__(self) -> str:
         return f'<Patreon username: {self.username}>'
+
+
+class Pinterest(db.Model, SocialNetwork):
+    links_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(network_name='pinterest', **kwargs)
+
+    def __repr__(self) -> str:
+        return f'<Pinterest username: {self.username}>'
