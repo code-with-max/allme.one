@@ -150,6 +150,7 @@ networks_data = {
                           'repr_name': 'Steam publisher',
                           'share_url': False,
                           },
+
        'patreon': {'url': 'https://www.patreon.com/',
                    'is_free': False,
                    'group': 'donate_world',
@@ -157,5 +158,13 @@ networks_data = {
                    'repr_name': 'Patreon',
                    'share_url': False,
                    },
+
+       'pinterest': {'url': 'https://www.pinterest.com/',
+                     'is_free': True,
+                     'group': 'collections',
+                     'icon_name': 'ti-brand-pinterest',
+                     'repr_name': 'Pinterest',
+                     'share_url': False,
+                     },
 
               }
