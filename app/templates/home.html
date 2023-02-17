@@ -3,11 +3,10 @@
 {% block title %}my page{% endblock %}
 
 {% block content %}
-
+<div class="container">
+<h1 class="display-5" align="center">Dashboard</h1>
 {# not confirmed E-mail attention #}
 {% if not user.email_confirmed %}
-<br>
-  <div class="container">
     <div class="card border-warning text-center">
       <div class="card-header">
         Warning
@@ -20,65 +19,62 @@
         </div>
       </div>
     </div>
-  </div>
 {% endif %}
 <br>
 <!-- Unique Link -->
-<div class="container">
   {% include 'links/home/unique_link.html' %}
-</div>
 <br>
 <!-- Share Buttons -->
-<div class="container">
   {% include 'links/cards/share_buttons.html' %}
 </div>
 <br>
 <!-- User added links -->
-<div class="container text-center">
-  <h4 align="center">Added links</h4>
-</div>
 {# ''' #}
 {# using list of strings #}
 {# may be later I must using switch-case method #}
 {# ''' #}
 <div class="container">
+<h1 class="display-6" align="center">Added links</h1>
+<div class="row row-cols-1 row-cols-md-2 g-2"> {# row #}
   {% for link in used_links %}
+  <div class="col"> {# col #}
     <!-- ABOUT -->
     {%  if  link.network_name == "about" %}
       {% include 'links/home/view/about.html' %}
-      <br>
     <!-- E-MAIL -->
     {% elif link.network_name == "email" %}
       {% include 'links/home/view/email.html' %}
-      <br>
     {% else %}
     <!-- OTHER LINKS: FACEBOOK TWITTER INSTAGRAM etc-->
       {% include 'links/home/view/common_view.html' %}
-      <br>
     {% endif %}
+  </div> {# end col #}
   {% endfor %}
+  </div> {# end row #}
 </div>
 <br>
 <!-- Avaible for user links (using list)-->
-<div class="container text-center">
-  <div class="container text-center">
-    <h4 align="center">Available links</h4>
-  </div>
   {# ''' #}
   {# Included here free and paid avaible links tempale #}
   {# I think need else more list of paid links... #}
   {# ''' #}
+  <div class="container text-center">
+  <h1 class="display-6" align="center">Available links</h1>
+  <div class="row row-cols-1 row-cols-md-2 g-2"> {# row #}
   {% if free_links %}
+    <div class="col">
     {% include 'links/home/view/freelinks.html' %}
+    </div>
     {% if not user.is_paying() %}
+      <div class="col">
       {% include 'links/home/view/postpaid.html' %}
+     </div>
     {% endif %}
   {% endif %}
 </div>
+</div> {# end row #}
 <br>
-<div class="container text-center">
-  <h4 align="center">Service menu</h4>
-</div>
+<h1 class="display-6" align="center">Service menu</h1>
 <div class="container">
   <div class="card">
     <div class="card-body">
