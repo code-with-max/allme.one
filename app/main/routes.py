@@ -53,6 +53,7 @@ def home():
     used_links, free_links = current_user.links[0].get_links()
     # I think need else more list of paid links...
     share_data = collect_share_data(current_user.links[0].unique_link)
+    # current_user.update_geo_data(ip=request.remote_addr)
     return render_template('home.html',
                            user=current_user,
                            used_links=used_links,

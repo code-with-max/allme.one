@@ -3,6 +3,7 @@ from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from paymentwall import Paymentwall, Product, Widget, Pingback
 from app.paywall import bp
+from app.paywall.utility import send_confirmation_email
 from app.extensions import db
 from app.models.links import Links
 from app.models.user import User
@@ -28,7 +29,11 @@ def make_payment():
     Paymentwall.set_app_key(os.environ.get('PAYWALL_PROJECT_KEY'))
     Paymentwall.set_secret_key(os.environ.get('PAYWALL_SECRET_KEY'))
 
-    # FIX for OLD users.TODO: make some lambda for fix it
+    # FIX for OLD users.
+    # TODO: Need make lambda for fix it
+    ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
+    if current_user.update_geo_data(ip=ip_addr):
+        db.session.commit()
     if not current_user.payment_UUID:
         new_UUID = uuid.uuid4()
         current_user.payment_UUID = new_UUID
@@ -69,6 +74,7 @@ def make_payment():
     return render_template('paywall/make_payment.html',
                            payurl=payurl,
                            centered_view=True,
+                           user_lang='RU'
                            )
 
 
@@ -102,6 +108,7 @@ def pingback():
                 if user.update_payment_status(product_id):
                     # db.session.add(user)
                     db.session.commit()
+                    send_confirmation_email(user.email, 'RU')
             elif pingback.is_cancelable():
                 # withdraw the product
                 pass
@@ -117,5 +124,5 @@ def pingback():
 
 @bp.route('/success/')
 def success():
-    flash("Payment accepted. Now you a PRO :)", category='success')
+    flash("Payment accepted.)", category='success')
     return redirect(url_for('main.home'))
