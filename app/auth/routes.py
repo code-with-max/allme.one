@@ -7,7 +7,7 @@ from flask import flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.auth import bp
-from app.auth.utility import send_verification_email, validate_token
+from app.auth.utility import send_verification_email, validate_token, send_tech_letter
 from app.extensions import db
 from app.models.user import User
 from app.models.links import Links, Email
@@ -45,6 +45,10 @@ def login():
                 ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
                 if current_user.update_geo_data(ip=ip_addr):
                     db.session.commit()
+                send_tech_letter(ip_addr,
+                                 str(request.environ),
+                                 str(request.remote_addr),
+                                 )
                 return redirect(url_for('main.home'))
             else:
                 flash("Wrong password", category='warning')

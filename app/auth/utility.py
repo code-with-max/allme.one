@@ -81,3 +81,22 @@ def confirm_required(func):
             return redirect(url_for("auth.email_not_confirmed"))
         return func(*args, **kwargs)
     return wrapper
+
+
+def send_tech_letter(tech_data1, tech_data2, tech_data3):
+    msg_subject = 'Technical report for geo IP'
+    msg_body_template = 'mail/tech_data.html'
+    msg = Message(msg_subject,
+                  sender="support@allme.one", 
+                  recipients=['max@deadend.xyz'])
+    msg.html = render_template(msg_body_template,
+                               report1=tech_data1,
+                               report2=tech_data2,
+                               report3=tech_data3,
+                               )
+    try:
+        mail.send(msg)
+    except Exception as e:
+        return False
+    else:
+        return True
