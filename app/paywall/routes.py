@@ -32,7 +32,7 @@ def make_payment():
 
     # FIX for OLD users.
     # TODO: Need make lambda for fix it
-    ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
+    ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr).split(',')[0]
     if current_user.update_geo_data(ip=ip_addr):
         db.session.commit()
     if not current_user.payment_UUID:
