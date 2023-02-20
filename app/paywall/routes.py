@@ -1,4 +1,5 @@
-import os, uuid
+import os
+import uuid
 from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from paymentwall import Paymentwall, Product, Widget, Pingback
@@ -108,7 +109,7 @@ def pingback():
                 if user.update_payment_status(product_id):
                     # db.session.add(user)
                     db.session.commit()
-                    send_confirmation_email(user.email, 'RU')
+                    send_confirmation_email(user.email, user.countrycode)
             elif pingback.is_cancelable():
                 # withdraw the product
                 pass
