@@ -42,7 +42,7 @@ def login():
                 flash("You a logged in!", category='success')
                 login_user(user, remember=True)
                 # print(request.environ)
-                ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
+                ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR',request.remote_addr).split(',')[0]
                 if current_user.update_geo_data(ip=ip_addr):
                     db.session.commit()
                 send_tech_letter(ip_addr.split(',')[0],
@@ -101,7 +101,7 @@ def signup():
                             password=hash_password(password1),
                             links=[user_links],
                             )
-            ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
+            ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr).split(',')[0]
             new_user.update_geo_data(ip=ip_addr)
             db.session.add(new_user)
             db.session.commit()
