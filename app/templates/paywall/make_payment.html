@@ -4,9 +4,16 @@
 
 {% block content %}
 
-<div class="containet text-center">
+<div class="container text-center">
     <p>
-    <h2>Go to allme.one PRO</h2>
+    <h1 class="display-5">Go to allme.one PRO</h1>
+    {% if user_lang == 'RU' %}
+      <h1 class="display-6">Используйте метод оплаты "test"</h1>
+      <p>Это бесплатно, платежные данные не потребуются</p>
+    {% else %}
+      <h1 class="display-6">Use the "test" payment method</h1>
+      <p>It's free, no payment details are required</p>
+    {% endif %}
     </p>
   </div>
   <br>

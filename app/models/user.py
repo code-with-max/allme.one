@@ -1,4 +1,6 @@
+import os  # FIXME only for debug
 import uuid
+import requests
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from app.extensions import db
@@ -25,6 +27,7 @@ class User(db.Model, UserMixin):
     payment_period = db.Column(db.String(12))
     payment_date = db.Column(db.DateTime(timezone=True))
     payment_UUID = db.Column(db.String(36), unique=True)
+    countrycode = db.Column(db.String(2))
     links = db.relationship('Links', backref='user', cascade='all, delete-orphan')
     api_keys = db.relationship('Apikey', backref='user', cascade='all, delete-orphan')
 
@@ -49,7 +52,7 @@ class User(db.Model, UserMixin):
     def update_payment_status(self, product_id: str) -> bool:
         if product_id == 'SKU02':  # TODO move product code to other list
             self.payment_state = 'silver'
-            self.payment_period = 'year'
+            self.payment_period = 'month'
             self.payment_date = func.now()
             return True  # FIXME may be need commit db session here
         elif product_id == 'SKU03':
@@ -59,3 +62,32 @@ class User(db.Model, UserMixin):
             return True
         else:
             return False
+
+    def update_geo_data(self, ip) -> bool:
+        '''
+        Update user GEO data in DB
+
+        using https://ipapi.co/api/
+        '''
+        # TODO need more excepts :)
+        if os.environ.get('FLASK_DEBUG'):
+            print(f'Current user country code: {self.countrycode}')
+        try:
+            response = requests.get(f"http://ipapi.co/{ip}/json/")
+            json = response.json()
+        except Exception as e:
+            if os.environ.get('FLASK_DEBUG'):
+                print(f'- geo IP error: {e}')
+            return False
+        try:
+            new_country_code = json['country_code']
+        except KeyError:
+            return False
+        if os.environ.get('FLASK_DEBUG'):
+            print(f'New user country code: {new_country_code}')
+        if self.countrycode != new_country_code:
+            self.countrycode = new_country_code
+            if os.environ.get('FLASK_DEBUG'):
+                print('User country data updated')
+            return True
+        return False

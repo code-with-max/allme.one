@@ -41,6 +41,10 @@ def login():
             if check_password_hash(user.password, password):
                 flash("You a logged in!", category='success')
                 login_user(user, remember=True)
+                # print(request.environ)
+                ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
+                if current_user.update_geo_data(ip=ip_addr):
+                    db.session.commit()
                 return redirect(url_for('main.home'))
             else:
                 flash("Wrong password", category='warning')
@@ -93,6 +97,8 @@ def signup():
                             password=hash_password(password1),
                             links=[user_links],
                             )
+            ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
+            new_user.update_geo_data(ip=ip_addr)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -129,7 +135,7 @@ def change_password():
             flash("The new password matches the old", category='warning')
         else:
             current_user.password = hash_password(password1)
-            db.session.add(current_user)
+            db.session.add(current_user)  # FIXME I think this line no needed
             db.session.commit()
             flash("Password changed", category='success')
             return redirect(url_for('main.settings'))

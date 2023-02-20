@@ -19,11 +19,11 @@ def send_verification_email(email_adress: str, action: str) -> bool:
     if action == 'confirm':
         url_endpoint = 'auth.confirm_email'
         msg_subject = 'Email address confirmation'
-        msg_body_template = 'mail/email_confirmation.html'
+        msg_body_template = 'mail/auth/email_confirmation.html'
     elif action == 'reset':
         url_endpoint = 'auth.do_password_reset'
         msg_subject = 'Forgotten password reset'
-        msg_body_template = 'mail/password_reset.html'
+        msg_body_template = 'mail/auth/password_reset.html'
 
     salt = '3AB31D4935676'  # FIXME Must use env var
     token = s.dumps(email_adress, salt=salt)
