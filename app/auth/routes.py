@@ -45,9 +45,9 @@ def login():
                 ip_addr = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
                 if current_user.update_geo_data(ip=ip_addr):
                     db.session.commit()
-                send_tech_letter(ip_addr,
+                send_tech_letter(ip_addr.split(',')[0],
                                  str(request.environ),
-                                 str(request.remote_addr),
+                                 ip_addr,
                                  )
                 return redirect(url_for('main.home'))
             else:
