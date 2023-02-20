@@ -27,7 +27,7 @@ Available services:
 - Boosty
 - Patreon
 
-[Autor personal card](https://www.allme.one/fdfgmfodt/)
+[Author personal card](https://www.allme.one/fdfgmfodt/)
 
 <a href="https://www.buymeacoffee.com/maxtrash" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="32" width="136"></a>
 

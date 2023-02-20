@@ -75,7 +75,7 @@ def make_payment():
     return render_template('paywall/make_payment.html',
                            payurl=payurl,
                            centered_view=True,
-                           user_lang='RU'
+                           user_lang=current_user.countrycode
                            )
 
 
