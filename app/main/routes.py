@@ -1,6 +1,6 @@
 from flask import render_template
 from flask import redirect, url_for
-from flask import request
+from flask import send_from_directory
 # from flask import flash
 from flask_login import login_required, current_user
 from app.main import bp
@@ -76,3 +76,9 @@ def index():
     return render_template("index.html",
                            visitor_authenticated=current_user.is_authenticated,
                            )
+
+
+@bp.route('/app-ads.txt')
+def app_ads_txt():
+    # AdMob app_ads.txt
+    return send_from_directory("static", "app-ads.txt")
