@@ -77,7 +77,7 @@ def index():
                            visitor_authenticated=current_user.is_authenticated,
                            )
 
-
+@bp.route('/ads.txt')
 @bp.route('/app-ads.txt')
 def app_ads_txt():
     # AdMob app_ads.txt
